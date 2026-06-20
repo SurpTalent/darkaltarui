@@ -26,7 +26,6 @@ run/
 日志/
 报错文件/
 *.zip
-META-INF/
 *.log
 
 # libs (local mod jars)
