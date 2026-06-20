@@ -1,0 +1,59 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+.gradle_repo
+
+# runtime
+runtime/
+run/
+
+# logs and temp
+日志/
+报错文件/
+*.zip
+META-INF/
+*.log
+
+# libs (local mod jars)
+libs/
+
+# changelog
+forge*changelog.txt
+changelog.txt
+
+# reasonix
+.reasonix/
+start_reasonix.bat
+
+# other mod sources
+四模组源码/
+
+# build scripts
+1.双击构建环境.exe
+2.双击启动游戏.exe
+3.双击打包模组.exe
+1.双击构建环境.bat
+2.双击启动游戏.bat
+3.双击打包模组.bat
+
+# temp
+com/
+pack.png
+CREDITS.txt
+README.txt
+LICENSE.txt
