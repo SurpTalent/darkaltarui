@@ -27,5 +27,12 @@ public final class ModNetwork {
                 AltarInfoPacket::decode,
                 AltarInfoPacket::handle
         );
+        CHANNEL.registerMessage(
+                packetId++,
+                BackpackExtractPacket.class,
+                BackpackExtractPacket::encode,
+                BackpackExtractPacket::decode,
+                BackpackExtractPacket::handle
+        );
     }
 }

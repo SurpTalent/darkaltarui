@@ -2,6 +2,7 @@ package com.xdsz.darkaltarui.event;
 
 import com.mojang.logging.LogUtils;
 import com.xdsz.darkaltarui.DarkAltarConfig;
+import com.xdsz.darkaltarui.emi.RitualEmiTransferHandler;
 import com.xdsz.darkaltarui.network.AltarInfoPacket;
 import com.xdsz.darkaltarui.network.ModNetwork;
 import net.minecraft.core.BlockPos;
@@ -93,6 +94,9 @@ public final class AltarEvents {
         List<AltarInfoPacket.RecipeInfo> recipes = collectRecipes(level, ritualTypes);
 
         prefillSavedData(serverPlayer, pedestals);
+
+        // 记录祭坛坐标供 EMI 填充使用
+        RitualEmiTransferHandler.currentAltarPos = pos.immutable();
 
         com.sighs.apricityui.ApricityUI.menu(serverPlayer, TEMPLATE_PATH)
                 .bind(b -> b.saveddata(SAVEDDATA_NAME, MAX_PEDESTALS).player());

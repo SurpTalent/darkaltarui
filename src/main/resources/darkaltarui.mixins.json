@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.xdsz.darkaltarui.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "UpgradeValidatorMixin",
+    "WirelessTransmitterRangeMixin",
+    "RSNetworkEnergyMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

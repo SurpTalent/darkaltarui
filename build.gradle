@@ -146,8 +146,18 @@ dependencies {
     // ApricityUI (AUI) — from Sighs Maven
     compileOnly fg.deobf("com.sighs:ApricityUI-forge-${minecraft_version}:${aui_version}")
 
-    // EMI — recipe viewer (user has EMI instead of JEI)
+    // EMI — recipe viewer
     compileOnly fg.deobf("maven.modrinth:emi:${emi_version}")
+
+    // Sophisticated Backpacks + Core (for backpack integration)
+    compileOnly fg.deobf("curse.maven:sophisticated-core-618298:${sc_file_id}")
+    compileOnly fg.deobf("curse.maven:sophisticated-backpacks-422301:${sb_file_id}")
+
+    // Refined Storage (for RS network integration)
+    compileOnly fg.deobf("curse.maven:refined-storage-243076:${rs_file_id}")
+
+    // Mixin
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.
@@ -177,7 +187,7 @@ tasks.named('jar', Jar).configure {
                 'Implementation-Version'  : project.jar.archiveVersion,
                 'Implementation-Vendor'   : mod_authors,
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-
+                'MixinConfigs'            : 'darkaltarui.mixins.json'
         ])
     }
     finalizedBy 'reobfJar'

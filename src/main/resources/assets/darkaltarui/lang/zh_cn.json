@@ -1,3 +1,8 @@
 {
+  "item.darkaltarui.soul_remote_terminal": "灵魂便捷合成终端",
+  "chat.darkaltarui.soul_not_enough": "§c灵魂能量不足，需要 %d 点",
+  "tooltip.darkaltarui.soul_remote_terminal.1": "§7右键 RS 网络设备绑定",
+  "tooltip.darkaltarui.soul_remote_terminal.2": "§7右键空气打开便携合成终端（消耗灵魂）",
+  "tooltip.darkaltarui.soul_remote_terminal.bound": "§8已绑定: %d, %d, %d",
   "jei.advancedmod.category.ritual": "仪式合成"
 }

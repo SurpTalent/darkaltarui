@@ -11,6 +11,8 @@ public class DarkAltarConfig {
 
     public static final ForgeConfigSpec.BooleanValue SOUL_COST_ENABLED;
     public static final ForgeConfigSpec.IntValue SOUL_COST_PER_ITEM;
+    public static final ForgeConfigSpec.IntValue FE_PER_SOUL;
+    public static final ForgeConfigSpec.IntValue TERMINAL_SOUL_COST;
 
     static {
         ForgeConfigSpec.Builder common = new ForgeConfigSpec.Builder();
@@ -22,6 +24,18 @@ public class DarkAltarConfig {
         SOUL_COST_PER_ITEM = common
                 .comment("操控每个物品消耗的灵魂能量点数")
                 .defineInRange("per_item", 1, 0, Integer.MAX_VALUE);
+        common.pop();
+
+        common.push("terminal");
+        TERMINAL_SOUL_COST = common
+                .comment("每次打开灵魂便捷终端消耗的灵魂能量")
+                .defineInRange("soul_cost_per_open", 2, 0, Integer.MAX_VALUE);
+        common.pop();
+
+        common.push("rs_power");
+        FE_PER_SOUL = common
+                .comment("诅咒之笼供电：每灵魂能量转换的 FE。0=禁用")
+                .defineInRange("fe_per_soul", 1000, 0, Integer.MAX_VALUE);
         common.pop();
 
         COMMON_SPEC = common.build();

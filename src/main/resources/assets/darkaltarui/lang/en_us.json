@@ -1,3 +1,8 @@
 {
+  "item.darkaltarui.soul_remote_terminal": "Soul Remote Terminal",
+  "chat.darkaltarui.soul_not_enough": "§cNot enough soul energy, need %d",
+  "tooltip.darkaltarui.soul_remote_terminal.1": "§7Right-click an RS device to bind",
+  "tooltip.darkaltarui.soul_remote_terminal.2": "§7Right-click air to open portable grid (costs soul energy)",
+  "tooltip.darkaltarui.soul_remote_terminal.bound": "§8Bound: %d, %d, %d",
   "jei.advancedmod.category.ritual": "Ritual Crafting"
 }
