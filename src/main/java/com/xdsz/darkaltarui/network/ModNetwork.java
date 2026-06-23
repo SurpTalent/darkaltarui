@@ -34,5 +34,12 @@ public final class ModNetwork {
                 BackpackExtractPacket::decode,
                 BackpackExtractPacket::handle
         );
+        CHANNEL.registerMessage(
+                packetId++,
+                RitualPreviewPacket.class,
+                RitualPreviewPacket::encode,
+                RitualPreviewPacket::decode,
+                RitualPreviewPacket::handle
+        );
     }
 }
