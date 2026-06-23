@@ -21,25 +21,28 @@ public class RitualPreviewOverlay {
 
     private static int tick = 0;
     private static BlockPos lastPos = null;
+    private static RitualPreviewPacket cached = null;
 
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
-        tick++;
-        if (tick % 20 != 0) return; // 每秒一次
+        if (++tick % 30 != 0) return; // 降低频率，减少卡顿
 
         Minecraft mc = Minecraft.getInstance();
-        if (mc.player == null || mc.level == null || mc.screen != null) return;
+        if (mc.player == null || mc.level == null || mc.screen != null) {
+            cached = null;
+            return;
+        }
 
         HitResult hit = mc.hitResult;
-        if (!(hit instanceof BlockHitResult bhr)) return;
+        if (!(hit instanceof BlockHitResult bhr)) { cached = null; return; }
         BlockPos pos = bhr.getBlockPos();
-        if (pos.equals(lastPos)) return; // 没变，不重复请求
+        if (pos.equals(lastPos) && cached != null) return;
         lastPos = pos;
 
         BlockEntity be = mc.level.getBlockEntity(pos);
         if (be == null || !be.getClass().getName().contains("DarkAltarBlockEntity")) {
-            Previews.handleResponse(new RitualPreviewPacket()); // 清空
+            cached = null;
             return;
         }
 
@@ -51,40 +54,51 @@ public class RitualPreviewOverlay {
 
     @SubscribeEvent
     public static void onRenderOverlay(RenderGuiOverlayEvent.Post event) {
-        RitualPreviewPacket pkt = Previews.getLatest();
-        if (pkt == null || pkt.ritualName.isEmpty()) return;
+        if (cached == null) return;
+        RitualPreviewPacket pkt = cached;
 
         GuiGraphics g = event.getGuiGraphics();
         Font font = Minecraft.getInstance().font;
-        int x = 12, y = 12;
+        int x = 8, y = 8;
+        int lineH = 12;
 
-        // 半透明背景
-        int lineH = 11;
-        int lines = 3 + pkt.materials.size();
-        int maxW = font.width(" ⚡ " + pkt.ritualName + "  ");
+        // 计算宽度
+        int maxW = 160;
         for (var m : pkt.materials)
-            maxW = Math.max(maxW, font.width("  " + m.name + " : " + m.found + "/" + m.needed + "  "));
-        maxW = Math.max(maxW, font.width("  仪式: " + pkt.ritualType + (pkt.missing.isEmpty() ? " ✅" : " ❌ " + pkt.missing) + "  "));
+            maxW = Math.max(maxW, font.width("  " + m.name + " ✅ " + m.found + "/" + m.needed));
+        maxW = Math.max(maxW, font.width(" 当前仪式需求: " + pkt.ritualType + (pkt.missing.isEmpty() ? " ✅" : " ❌")));
 
-        g.fill(x, y, x + maxW + 8, y + lines * lineH + 6, 0xCC000000);
+        // 背景
+        int lines = 3 + pkt.materials.size();
+        g.fill(x, y, x + maxW + 10, y + lines * lineH + 6, 0xDD222222);
+        g.fill(x, y, x + 3, y + lines * lineH + 6, 0xFFFFAA00); // 左边金色条
 
-        y += 4;
-        g.drawString(font, "⚡ " + pkt.ritualName, x + 4, y, 0xFFD4A017);
-        y += lineH;
+        x += 6; y += 4;
+        g.drawString(font, "当前预合成: §e" + pkt.ritualName, x, y, 0xFFFFFF); y += lineH;
+        String status = pkt.missing.isEmpty()
+            ? "当前仪式需求: §a" + pkt.ritualType + " ✅"
+            : "当前仪式需求: §c" + pkt.ritualType + " ❌ 缺少 " + pkt.missing;
+        g.drawString(font, status, x, y, 0xFFFFFF); y += lineH;
 
-        String statusLine = pkt.missing.isEmpty()
-            ? "仪式 " + pkt.ritualType + " ✅ 材料齐全"
-            : "仪式 " + pkt.ritualType + " ❌ 缺少 " + pkt.missing;
-        g.drawString(font, statusLine, x + 4, y, 0xFFAAAAAA);
-        y += lineH;
-
-        g.drawString(font, "材料:", x + 4, y, 0xFFAAAAAA);
-        y += lineH;
-
-        for (var m : pkt.materials) {
-            String line = (m.present ? "§a✓" : "§c✗") + " §f" + m.name + " §7" + m.found + "/" + m.needed;
-            g.drawString(font, line, x + 8, y, 0xFFFFFF);
-            y += lineH;
+        StringBuilder items = new StringBuilder("需要物品: ");
+        for (int i = 0; i < pkt.materials.size(); i++) {
+            var m = pkt.materials.get(i);
+            items.append(m.present ? "§a" : "§c").append(m.name).append(" ")
+                .append(m.found).append("/").append(m.needed).append("§r");
+            if (i < pkt.materials.size() - 1) items.append(", ");
+        }
+        // 折行处理
+        String itemStr = items.toString();
+        int iw = font.width(itemStr);
+        if (iw > maxW) {
+            g.drawString(font, "需要物品:", x, y, 0xFFFFFF); y += lineH;
+            for (var m : pkt.materials) {
+                String line = "  " + (m.present ? "§a" : "§c") + m.name + " §7" + m.needed + "个";
+                if (m.found < m.needed) line += " §c(缺" + (m.needed - m.found) + ")";
+                g.drawString(font, line, x, y, 0xFFFFFF); y += lineH;
+            }
+        } else {
+            g.drawString(font, itemStr, x, y, 0xFFFFFF);
         }
     }
 }
