@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: Jade
-Implementation-Version: 11.13.2+forge
-Implementation-Timestamp: 2025-08-06T22:14:17+0800
-MixinConfigs: jade.mixins.json
-

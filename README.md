@@ -3,7 +3,7 @@
 [![MC Version](https://img.shields.io/badge/Minecraft-1.20.1-blue)](https://minecraft.net)
 [![Forge](https://img.shields.io/badge/Forge-47.2.0+-orange)](https://files.minecraftforge.net)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Version](https://img.shields.io/badge/version-3.0.1-brightgreen)](https://github.com/SurpTalent/darkaltarui)
+[![Version](https://img.shields.io/badge/version-3.6.1-brightgreen)](https://github.com/SurpTalent/darkaltarui)
 
 为 [Goety（诡厄巫法）](https://www.curseforge.com/minecraft/mc-mods/goety) 的黑暗祭坛提供 AUI 图形化操作界面，支持 JEI/EMI 配方一键自动填充。背包装备 / RS 网络存储联动。
 
@@ -16,6 +16,7 @@
 - 💎 **灵魂便捷终端** — 右键 RS 设备绑定，右键打开无线网格（消耗灵魂）
 - 🔗 **链接宝石无限距离** — 链接宝石放 RS 无线发射器升级槽，无视距离
 - ⚡ **诅咒之笼供电** — 诅咒之笼输出 FE 给 RS 网络（1灵魂=1000FE，可配置）
+- 🌿 **智能配方预览** — 目光看祭坛时浮窗显示预测配方、仪式类型、材料匹配度
 - 📋 **NBT 宽松匹配** — 配方 NBT 是背包物品的子集即可匹配
 - 🔒 **物品安全** — 打开界面时清空底座物品防止被拿走
 
@@ -36,6 +37,23 @@
 3. JEI/EMI 查看仪式配方，点 + 自动填充底座
 4. 激活物品自动放祭坛方块上
 5. 右键祭坛取走激活物品再放回去开始仪式
+
+## 仪式预览（v3.1+）
+
+目光看祭坛 → 左上角浮窗自动显示：
+
+```
+预合成: 尖牙盛宴聚晶
+仪式: 魔法仪式 ✅
+  缺少: 末影珍珠×3
+  ✓ 饥饿核心 2个
+  ✗ 末影珍珠 1/4个
+  ✗ 金锭 0/2个
+```
+
+- 祭坛空 + 底座有物品 → 根据底座物品推断配方
+- 祭坛空 + 底座空 → 显示当前支持的仪式列表
+- 视线移开 → 浮窗消失（Jade 风格）
 
 ## 灵魂便捷终端
 
