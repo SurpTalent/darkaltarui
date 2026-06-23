@@ -1,6 +1,7 @@
 package com.xdsz.darkaltarui;
 
 import com.mojang.logging.LogUtils;
+import com.xdsz.darkaltarui.client.RitualPreviewOverlay;
 import com.xdsz.darkaltarui.event.AltarEvents;
 import com.xdsz.darkaltarui.item.SoulRemoteTerminal;
 import com.xdsz.darkaltarui.network.ModNetwork;
@@ -32,6 +33,9 @@ public class AdvancedMod {
         DarkAltarConfig.register();
 
         MinecraftForge.EVENT_BUS.register(AltarEvents.class);
+        if (net.minecraftforge.fml.loading.FMLEnvironment.dist == net.minecraftforge.api.distmarker.Dist.CLIENT) {
+            RitualPreviewOverlay.init();
+        }
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
