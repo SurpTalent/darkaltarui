@@ -42,13 +42,14 @@ public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContai
     public boolean craft(EmiRecipe recipe, EmiCraftContext<ApricityContainerMenu> ctx) {
         List<ItemStack> ingredients = new ArrayList<>();
         ItemStack activation = ItemStack.EMPTY;
-        int idx = 0;
-        for (var input : recipe.getInputs()) {
-            if (input.isEmpty()) { idx++; continue; }
-            ItemStack copy = input.getEmiStacks().get(0).getItemStack().copy();
-            if (idx == 0) activation = copy;
-            else ingredients.add(copy);
-            idx++;
+        var inputs = recipe.getInputs();
+        // index 0 = activation, 1+ = pedestals
+        if (!inputs.isEmpty() && !inputs.get(0).isEmpty())
+            activation = inputs.get(0).getEmiStacks().get(0).getItemStack().copy();
+        for (int i = 1; i < inputs.size(); i++) {
+            var in = inputs.get(i);
+            if (!in.isEmpty())
+                ingredients.add(in.getEmiStacks().get(0).getItemStack().copy());
         }
         int x = currentAltarPos != null ? currentAltarPos.getX() : 0;
         int y = currentAltarPos != null ? currentAltarPos.getY() : 0;

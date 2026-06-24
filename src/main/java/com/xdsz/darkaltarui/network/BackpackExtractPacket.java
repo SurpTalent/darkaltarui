@@ -106,18 +106,23 @@ public class BackpackExtractPacket {
             if (!activation.isEmpty()) {
                 boolean ex = extract(sp, menu, savedStart, invStart, -1, activation, handlers, rsNet);
                 if (ex) {
+                    // 放祭坛槽位0 — 和放底座一样
                     BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
-                    // 模拟玩家手持激活物品右键黑暗祭坛
-                    ItemStack held = sp.getMainHandItem();
-                    sp.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, activation.copy());
-                    var state = sp.level().getBlockState(ap);
-                    state.getBlock().use(state, sp.level(), ap, sp, 
-                        net.minecraft.world.InteractionHand.MAIN_HAND,
-                        new net.minecraft.world.phys.BlockHitResult(
-                            net.minecraft.world.phys.Vec3.atCenterOf(ap),
-                            net.minecraft.core.Direction.UP, ap, false));
-                    sp.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, held);
-                    AdvancedMod.LOGGER.info("[DAU-PKT] activation via block.use");
+                    var be = sp.level().getBlockEntity(ap);
+                    if (be != null) {
+                        var cap = be.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+                        cap.resolve().ifPresent(h -> {
+                            if (h.getSlots() > 0 && h.getStackInSlot(0).isEmpty()) {
+                                if (h instanceof net.minecraftforge.items.IItemHandlerModifiable mh)
+                                    mh.setStackInSlot(0, activation.copy());
+                                else
+                                    h.insertItem(0, activation.copy(), false);
+                                be.setChanged();
+                                be.getLevel().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
+                                AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar");
+                            }
+                        });
+                    }
                 }
             }
 
