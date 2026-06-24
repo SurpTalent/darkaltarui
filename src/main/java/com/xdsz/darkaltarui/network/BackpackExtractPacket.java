@@ -104,13 +104,21 @@ public class BackpackExtractPacket {
                     BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
                     var be = sp.level().getBlockEntity(ap);
                     if (be != null) {
+                        // 直接用 setStackInSlot 放物品 + 标记网络同步
                         var cap = be.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
                         cap.resolve().ifPresent(h -> {
                             if (h.getSlots() > 0 && h.getStackInSlot(0).isEmpty()) {
-                                h.insertItem(0, activation.copy(), false);
+                                if (h instanceof net.minecraftforge.items.IItemHandlerModifiable mh) {
+                                    mh.setStackInSlot(0, activation.copy());
+                                } else {
+                                    h.insertItem(0, activation.copy(), false);
+                                }
                                 be.setChanged();
                                 sp.level().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
                                 AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar");
+                            } else {
+                                AdvancedMod.LOGGER.info("[DAU-PKT] altar slot not empty? slots={} stack={}",
+                                    h.getSlots(), h.getSlots() > 0 ? h.getStackInSlot(0).getDisplayName().getString() : "none");
                             }
                         });
                     }
