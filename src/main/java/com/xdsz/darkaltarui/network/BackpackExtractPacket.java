@@ -104,21 +104,29 @@ public class BackpackExtractPacket {
                     BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
                     var be = sp.level().getBlockEntity(ap);
                     if (be != null) {
-                        // 直接用 setStackInSlot 放物品 + 标记网络同步
                         var cap = be.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+                        AdvancedMod.LOGGER.info("[DAU-PKT] altar BE={}, cap={}", be.getClass().getName(), cap.isPresent());
                         cap.resolve().ifPresent(h -> {
+                            AdvancedMod.LOGGER.info("[DAU-PKT] altar handler: slots={}, slot0={}, modifiable={}",
+                                h.getSlots(), 
+                                h.getSlots() > 0 ? h.getStackInSlot(0).getDisplayName().getString() : "N/A",
+                                h instanceof net.minecraftforge.items.IItemHandlerModifiable);
                             if (h.getSlots() > 0 && h.getStackInSlot(0).isEmpty()) {
                                 if (h instanceof net.minecraftforge.items.IItemHandlerModifiable mh) {
                                     mh.setStackInSlot(0, activation.copy());
+                                    AdvancedMod.LOGGER.info("[DAU-PKT] setStackInSlot done, now slot0={}",
+                                        h.getStackInSlot(0).getDisplayName().getString());
                                 } else {
                                     h.insertItem(0, activation.copy(), false);
+                                    AdvancedMod.LOGGER.info("[DAU-PKT] insertItem done, now slot0={}",
+                                        h.getStackInSlot(0).getDisplayName().getString());
                                 }
                                 be.setChanged();
                                 sp.level().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
                                 AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar");
                             } else {
-                                AdvancedMod.LOGGER.info("[DAU-PKT] altar slot not empty? slots={} stack={}",
-                                    h.getSlots(), h.getSlots() > 0 ? h.getStackInSlot(0).getDisplayName().getString() : "none");
+                                AdvancedMod.LOGGER.info("[DAU-PKT] altar slot NOT empty: {}",
+                                    h.getSlots() > 0 ? h.getStackInSlot(0).getDisplayName().getString() : "no slots");
                             }
                         });
                     }
