@@ -28,19 +28,16 @@ import java.util.function.Supplier;
 public class BackpackExtractPacket {
 
     private final List<ItemStack> ingredients;
-    private final ItemStack activationItem;
     private final int altarX, altarY, altarZ;
 
-    public BackpackExtractPacket(List<ItemStack> ingredients, ItemStack activation, int ax, int ay, int az) {
+    public BackpackExtractPacket(List<ItemStack> ingredients, int ax, int ay, int az) {
         this.ingredients = ingredients;
-        this.activationItem = activation;
         this.altarX = ax; this.altarY = ay; this.altarZ = az;
     }
 
     public static void encode(BackpackExtractPacket pkt, FriendlyByteBuf buf) {
         buf.writeInt(pkt.ingredients.size());
         for (ItemStack s : pkt.ingredients) buf.writeItem(s);
-        buf.writeItem(pkt.activationItem);
         buf.writeInt(pkt.altarX);
         buf.writeInt(pkt.altarY);
         buf.writeInt(pkt.altarZ);
@@ -50,8 +47,7 @@ public class BackpackExtractPacket {
         int size = buf.readInt();
         List<ItemStack> list = new ArrayList<>(size);
         for (int i = 0; i < size; i++) list.add(buf.readItem());
-        ItemStack act = buf.readItem();
-        return new BackpackExtractPacket(list, act, buf.readInt(), buf.readInt(), buf.readInt());
+        return new BackpackExtractPacket(list, buf.readInt(), buf.readInt(), buf.readInt());
     }
 
     public static void handle(BackpackExtractPacket pkt, Supplier<NetworkEvent.Context> ctx) {
@@ -82,7 +78,7 @@ public class BackpackExtractPacket {
             ItemStack[] init = new ItemStack[12];
             for (int s = 0; s < 12; s++) init[s] = menu.slots.get(savedStart + s).getItem().copy();
 
-            // 填充底座（跳过索引 0，那是激活物品占位）
+            // 填充底座（索引 1+）
             for (int idx = 1; idx < pkt.ingredients.size(); idx++) {
                 ItemStack needed = pkt.ingredients.get(idx);
                 if (needed.isEmpty()) continue;
@@ -100,30 +96,25 @@ public class BackpackExtractPacket {
                 else AdvancedMod.LOGGER.info("[DAU-PKT] ing[{}] NOT FOUND", idx);
             }
 
-            // 激活物品 — 模拟玩家右键放置
-            ItemStack activation = pkt.activationItem.isEmpty() && !pkt.ingredients.isEmpty() 
-                ? pkt.ingredients.get(0) : pkt.activationItem;
+            // 激活物品（索引 0）
+            ItemStack activation = pkt.ingredients.isEmpty() ? ItemStack.EMPTY : pkt.ingredients.get(0);
             if (!activation.isEmpty()) {
                 boolean ex = extract(sp, menu, savedStart, invStart, -1, activation, handlers, rsNet);
                 if (ex) {
-                    // 放祭坛槽位0 — 和放底座一样
                     BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
                     var be = sp.level().getBlockEntity(ap);
                     if (be != null) {
                         var cap = be.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
                         cap.resolve().ifPresent(h -> {
                             if (h.getSlots() > 0 && h.getStackInSlot(0).isEmpty()) {
-                                if (h instanceof net.minecraftforge.items.IItemHandlerModifiable mh)
-                                    mh.setStackInSlot(0, activation.copy());
-                                else
-                                    h.insertItem(0, activation.copy(), false);
+                                h.insertItem(0, activation.copy(), false);
                                 be.setChanged();
-                                be.getLevel().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
+                                sp.level().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
                                 AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar");
                             }
                         });
                     }
-                }
+                } else AdvancedMod.LOGGER.info("[DAU-PKT] activation NOT FOUND");
             }
 
             if (rsNet != null && slotIdx > 0)
