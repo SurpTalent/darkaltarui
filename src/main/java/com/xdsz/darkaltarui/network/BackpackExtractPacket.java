@@ -28,16 +28,19 @@ import java.util.function.Supplier;
 public class BackpackExtractPacket {
 
     private final List<ItemStack> ingredients;
+    private final ItemStack activationItem;
     private final int altarX, altarY, altarZ;
 
-    public BackpackExtractPacket(List<ItemStack> ingredients, int ax, int ay, int az) {
+    public BackpackExtractPacket(List<ItemStack> ingredients, ItemStack activation, int ax, int ay, int az) {
         this.ingredients = ingredients;
+        this.activationItem = activation;
         this.altarX = ax; this.altarY = ay; this.altarZ = az;
     }
 
     public static void encode(BackpackExtractPacket pkt, FriendlyByteBuf buf) {
         buf.writeInt(pkt.ingredients.size());
         for (ItemStack s : pkt.ingredients) buf.writeItem(s);
+        buf.writeItem(pkt.activationItem);
         buf.writeInt(pkt.altarX);
         buf.writeInt(pkt.altarY);
         buf.writeInt(pkt.altarZ);
@@ -47,7 +50,8 @@ public class BackpackExtractPacket {
         int size = buf.readInt();
         List<ItemStack> list = new ArrayList<>(size);
         for (int i = 0; i < size; i++) list.add(buf.readItem());
-        return new BackpackExtractPacket(list, buf.readInt(), buf.readInt(), buf.readInt());
+        ItemStack act = buf.readItem();
+        return new BackpackExtractPacket(list, act, buf.readInt(), buf.readInt(), buf.readInt());
     }
 
     public static void handle(BackpackExtractPacket pkt, Supplier<NetworkEvent.Context> ctx) {
@@ -78,8 +82,8 @@ public class BackpackExtractPacket {
             ItemStack[] init = new ItemStack[12];
             for (int s = 0; s < 12; s++) init[s] = menu.slots.get(savedStart + s).getItem().copy();
 
-            // 填充底座（索引 1+）
-            for (int idx = 1; idx < pkt.ingredients.size(); idx++) {
+            // 填充底座
+            for (int idx = 0; idx < pkt.ingredients.size(); idx++) {
                 ItemStack needed = pkt.ingredients.get(idx);
                 if (needed.isEmpty()) continue;
 
@@ -96,8 +100,8 @@ public class BackpackExtractPacket {
                 else AdvancedMod.LOGGER.info("[DAU-PKT] ing[{}] NOT FOUND", idx);
             }
 
-            // 激活物品（索引 0）
-            ItemStack activation = pkt.ingredients.isEmpty() ? ItemStack.EMPTY : pkt.ingredients.get(0);
+            // 激活物品
+            ItemStack activation = pkt.activationItem;
             if (!activation.isEmpty()) {
                 boolean ex = extract(sp, menu, savedStart, invStart, -1, activation, handlers, rsNet);
                 if (ex) {

@@ -41,15 +41,21 @@ public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContai
     @Override
     public boolean craft(EmiRecipe recipe, EmiCraftContext<ApricityContainerMenu> ctx) {
         List<ItemStack> ingredients = new ArrayList<>();
+        ItemStack activation = ItemStack.EMPTY;
+        int idx = 0;
         for (var input : recipe.getInputs()) {
-            if (input.isEmpty()) ingredients.add(ItemStack.EMPTY);
-            else ingredients.add(input.getEmiStacks().get(0).getItemStack().copy());
+            if (input.isEmpty()) { idx++; continue; }
+            ItemStack copy = input.getEmiStacks().get(0).getItemStack().copy();
+            if (idx == 0) activation = copy;
+            else ingredients.add(copy);
+            idx++;
         }
         int x = currentAltarPos != null ? currentAltarPos.getX() : 0;
         int y = currentAltarPos != null ? currentAltarPos.getY() : 0;
         int z = currentAltarPos != null ? currentAltarPos.getZ() : 0;
-        ModNetwork.CHANNEL.sendToServer(new BackpackExtractPacket(ingredients, x, y, z));
-        AdvancedMod.LOGGER.info("[DAU] packet sent, {} ingredients, altar=({},{},{})", ingredients.size(), x, y, z);
+        ModNetwork.CHANNEL.sendToServer(new BackpackExtractPacket(ingredients, activation, x, y, z));
+        AdvancedMod.LOGGER.info("[DAU] packet sent, {} ingredients, activation={}, altar=({},{},{})",
+            ingredients.size(), activation.isEmpty() ? "none" : activation.getDisplayName().getString(), x, y, z);
         return true;
     }
 }
