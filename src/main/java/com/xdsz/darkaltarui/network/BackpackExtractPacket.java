@@ -109,6 +109,7 @@ public class BackpackExtractPacket {
                             if (h.getSlots() > 0 && h.getStackInSlot(0).isEmpty()) {
                                 h.insertItem(0, activation.copy(), false);
                                 be.setChanged();
+                                sp.level().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
                                 AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar");
                             }
                         });
@@ -118,6 +119,11 @@ public class BackpackExtractPacket {
 
             if (rsNet != null && slotIdx > 0)
                 rsNet.getItemStorageCache().invalidate(InvalidateCause.DISK_INVENTORY_CHANGED);
+
+            // 关键：强制同步容器到客户端（修复幽灵物品）
+            if (slotIdx > 0) {
+                menu.broadcastChanges();
+            }
 
             AdvancedMod.LOGGER.info("[DAU-PKT] done, filled {}", slotIdx);
         });
@@ -138,7 +144,9 @@ public class BackpackExtractPacket {
                     menu.clicked(savedStart + slotIdx, 1, ClickType.PICKUP, sp);
                     menu.clicked(invStart + i, 0, ClickType.PICKUP, sp);
                 } else {
+                    // 激活物品消耗（shrink + 标记脏）
                     st.shrink(1);
+                    menu.slots.get(invStart + i).setChanged();
                 }
                 return true;
             }
