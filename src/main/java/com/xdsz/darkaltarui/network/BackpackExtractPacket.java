@@ -100,39 +100,24 @@ public class BackpackExtractPacket {
                 else AdvancedMod.LOGGER.info("[DAU-PKT] ing[{}] NOT FOUND", idx);
             }
 
-            // 激活物品 — 通过服务端查配方获取
-            if (!pkt.activationItem.isEmpty() || true) { // 强制处理
-                // 查找正确的激活物品
-                ItemStack actualActivation = pkt.activationItem;
-                // 如果客户端没传（空），从第一顺位配方推断
-                if (actualActivation.isEmpty() && !pkt.ingredients.isEmpty()) {
-                    actualActivation = pkt.ingredients.get(0); // 客户端可能把 activation 放第一个
-                }
-                if (!actualActivation.isEmpty()) {
-                    boolean ex = extract(sp, menu, savedStart, invStart, -1, actualActivation, handlers, rsNet);
-                    AdvancedMod.LOGGER.info("[DAU-PKT] activation extracted={}", ex);
-                    if (ex) {
-                        ItemStack item = actualActivation.copy(); // 需要 effectively final
-                        BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
-                        var be = sp.level().getBlockEntity(ap);
-                        if (be != null) {
-                            var cap = be.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
-                            AdvancedMod.LOGGER.info("[DAU-PKT] altar cap present={}", cap.isPresent());
-                            cap.resolve().ifPresent(h -> {
-                                if (h instanceof net.minecraftforge.items.IItemHandlerModifiable mh) {
-                                    mh.setStackInSlot(0, item);
-                                    AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar via setStackInSlot");
-                                } else {
-                                    h.insertItem(0, item, false);
-                                    AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar via insertItem");
-                                }
-                                be.setChanged();
-                                sp.level().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
-                            });
-                        }
-                    }
-                } else {
-                    AdvancedMod.LOGGER.info("[DAU-PKT] activation item is EMPTY, skip");
+            // 激活物品 — 模拟玩家右键放置
+            ItemStack activation = pkt.activationItem.isEmpty() && !pkt.ingredients.isEmpty() 
+                ? pkt.ingredients.get(0) : pkt.activationItem;
+            if (!activation.isEmpty()) {
+                boolean ex = extract(sp, menu, savedStart, invStart, -1, activation, handlers, rsNet);
+                if (ex) {
+                    BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
+                    // 模拟玩家手持激活物品右键黑暗祭坛
+                    ItemStack held = sp.getMainHandItem();
+                    sp.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, activation.copy());
+                    var state = sp.level().getBlockState(ap);
+                    state.getBlock().use(state, sp.level(), ap, sp, 
+                        net.minecraft.world.InteractionHand.MAIN_HAND,
+                        new net.minecraft.world.phys.BlockHitResult(
+                            net.minecraft.world.phys.Vec3.atCenterOf(ap),
+                            net.minecraft.core.Direction.UP, ap, false));
+                    sp.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, held);
+                    AdvancedMod.LOGGER.info("[DAU-PKT] activation via block.use");
                 }
             }
 
