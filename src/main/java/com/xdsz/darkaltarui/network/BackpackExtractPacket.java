@@ -82,8 +82,8 @@ public class BackpackExtractPacket {
             ItemStack[] init = new ItemStack[12];
             for (int s = 0; s < 12; s++) init[s] = menu.slots.get(savedStart + s).getItem().copy();
 
-            // 填充底座
-            for (int idx = 0; idx < pkt.ingredients.size(); idx++) {
+            // 填充底座（跳过索引 0，那是激活物品占位）
+            for (int idx = 1; idx < pkt.ingredients.size(); idx++) {
                 ItemStack needed = pkt.ingredients.get(idx);
                 if (needed.isEmpty()) continue;
 
@@ -100,41 +100,40 @@ public class BackpackExtractPacket {
                 else AdvancedMod.LOGGER.info("[DAU-PKT] ing[{}] NOT FOUND", idx);
             }
 
-            // 激活物品
-            ItemStack activation = pkt.activationItem;
-            if (!activation.isEmpty()) {
-                boolean ex = extract(sp, menu, savedStart, invStart, -1, activation, handlers, rsNet);
-                if (ex) {
-                    BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
-                    var be = sp.level().getBlockEntity(ap);
-                    if (be != null) {
-                        var cap = be.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
-                        AdvancedMod.LOGGER.info("[DAU-PKT] altar BE={}, cap={}", be.getClass().getName(), cap.isPresent());
-                        cap.resolve().ifPresent(h -> {
-                            AdvancedMod.LOGGER.info("[DAU-PKT] altar handler: slots={}, slot0={}, modifiable={}",
-                                h.getSlots(), 
-                                h.getSlots() > 0 ? h.getStackInSlot(0).getDisplayName().getString() : "N/A",
-                                h instanceof net.minecraftforge.items.IItemHandlerModifiable);
-                            if (h.getSlots() > 0 && h.getStackInSlot(0).isEmpty()) {
+            // 激活物品 — 通过服务端查配方获取
+            if (!pkt.activationItem.isEmpty() || true) { // 强制处理
+                // 查找正确的激活物品
+                ItemStack actualActivation = pkt.activationItem;
+                // 如果客户端没传（空），从第一顺位配方推断
+                if (actualActivation.isEmpty() && !pkt.ingredients.isEmpty()) {
+                    actualActivation = pkt.ingredients.get(0); // 客户端可能把 activation 放第一个
+                }
+                if (!actualActivation.isEmpty()) {
+                    boolean ex = extract(sp, menu, savedStart, invStart, -1, actualActivation, handlers, rsNet);
+                    AdvancedMod.LOGGER.info("[DAU-PKT] activation extracted={}", ex);
+                    if (ex) {
+                        ItemStack item = actualActivation.copy(); // 需要 effectively final
+                        BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
+                        var be = sp.level().getBlockEntity(ap);
+                        if (be != null) {
+                            var cap = be.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+                            AdvancedMod.LOGGER.info("[DAU-PKT] altar cap present={}", cap.isPresent());
+                            cap.resolve().ifPresent(h -> {
                                 if (h instanceof net.minecraftforge.items.IItemHandlerModifiable mh) {
-                                    mh.setStackInSlot(0, activation.copy());
-                                    AdvancedMod.LOGGER.info("[DAU-PKT] setStackInSlot done, now slot0={}",
-                                        h.getStackInSlot(0).getDisplayName().getString());
+                                    mh.setStackInSlot(0, item);
+                                    AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar via setStackInSlot");
                                 } else {
-                                    h.insertItem(0, activation.copy(), false);
-                                    AdvancedMod.LOGGER.info("[DAU-PKT] insertItem done, now slot0={}",
-                                        h.getStackInSlot(0).getDisplayName().getString());
+                                    h.insertItem(0, item, false);
+                                    AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar via insertItem");
                                 }
                                 be.setChanged();
                                 sp.level().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
-                                AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar");
-                            } else {
-                                AdvancedMod.LOGGER.info("[DAU-PKT] altar slot NOT empty: {}",
-                                    h.getSlots() > 0 ? h.getStackInSlot(0).getDisplayName().getString() : "no slots");
-                            }
-                        });
+                            });
+                        }
                     }
-                } else AdvancedMod.LOGGER.info("[DAU-PKT] activation NOT FOUND");
+                } else {
+                    AdvancedMod.LOGGER.info("[DAU-PKT] activation item is EMPTY, skip");
+                }
             }
 
             if (rsNet != null && slotIdx > 0)
