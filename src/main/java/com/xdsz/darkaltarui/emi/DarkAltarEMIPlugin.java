@@ -16,7 +16,7 @@ import net.minecraft.world.item.Items;
  * 1. 告诉 EMI AUI 屏幕的 GUI 边界
  * 2. 给 Goety 已有的 ritual 分类添加 + 传输处理器
  */
-@EmiEntrypoint
+@EmiEntrypoint // 仅在 EMI 存在时加载
 public class DarkAltarEMIPlugin implements EmiPlugin {
 
     /** Goety 的仪式配方分类 ID */

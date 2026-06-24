@@ -1,0 +1,484 @@
+---- Minecraft Crash Report ----
+// Embeddium instance tainted by mods: [flerovium, oculus]
+// Please do not reach out for Embeddium support without removing these mods first.
+// -------
+// Surprise! Haha. Well, this is awkward.
+
+Time: 2026-06-25 00:41:04
+Description: Exception in server tick loop
+
+java.lang.NoClassDefFoundError: dev/emi/emi/api/recipe/handler/EmiRecipeHandler
+	at java.lang.ClassLoader.defineClass1(Native Method) ~[?:?] {re:mixin}
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:962) ~[?:?] {re:mixin}
+	at cpw.mods.cl.ModuleClassLoader.readerToClass(ModuleClassLoader.java:119) ~[securejarhandler-2.1.10.jar:?] {}
+	at cpw.mods.cl.ModuleClassLoader.lambda$findClass$15(ModuleClassLoader.java:219) ~[securejarhandler-2.1.10.jar:?] {}
+	at cpw.mods.cl.ModuleClassLoader.loadFromModule(ModuleClassLoader.java:229) ~[securejarhandler-2.1.10.jar:?] {}
+	at cpw.mods.cl.ModuleClassLoader.findClass(ModuleClassLoader.java:219) ~[securejarhandler-2.1.10.jar:?] {}
+	at cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:135) ~[securejarhandler-2.1.10.jar:?] {}
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:490) ~[?:?] {re:mixin}
+	at com.xdsz.darkaltarui.event.AltarEvents.onRightClickBlock(AltarEvents.java:99) ~[darkaltarui-3.7.7-Forge1.20.1.jar%23738!/:?] {re:classloading}
+	at com.xdsz.darkaltarui.event.__AltarEvents_onRightClickBlock_RightClickBlock.invoke(.dynamic) ~[darkaltarui-3.7.7-Forge1.20.1.jar%23738!/:?] {re:classloading,pl:eventbus:B}
+	at net.minecraftforge.eventbus.ASMEventHandler.invoke(ASMEventHandler.java:55) ~[eventbus-6.2.33.jar%23137!/:?] {re:computing_frames}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:312) ~[eventbus-6.2.33.jar%23137!/:?] {re:mixin,pl:RevelationFixPlugin:B}
+	at net.minecraftforge.eventbus.EventBus.post(EventBus.java:298) ~[eventbus-6.2.33.jar%23137!/:?] {re:mixin,pl:RevelationFixPlugin:B}
+	at net.minecraftforge.common.ForgeHooks.onRightClickBlock(ForgeHooks.java:802) ~[forge-1.20.1-47.4.20-universal.jar%23797!/:?] {re:mixin,re:classloading,pl:mixin:APP:vp.mixins.json:ForgeMixin,pl:mixin:APP:revelationfix.mixins.json:ForgeHooksMixin,pl:mixin:APP:modernfix-modernfix.mixins.json:perf.faster_ingredients.ForgeHooksMixin,pl:mixin:APP:ending_library.mixins.json:advanced.data_expand.component.ForgeHooksMixin,pl:mixin:APP:lootjs-forge.mixins.json:ForgeHooksMixin,pl:mixin:APP:twilightdelight.mixins.json:ForgeHooksMixin,pl:mixin:APP:enigmaticlegacy.mixins.json:MixinForgeHooks,pl:mixin:A}
+	at net.minecraft.server.level.ServerPlayerGameMode.m_7179_(ServerPlayerGameMode.java:331) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:computing_frames,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:pehkui.mixins.json:reach.compat1204minus.compat119plus.ServerPlayerInteractionManagerMixin,pl:mixin:APP:questsadditions.mixins.json:MixinPlayerInteractionManager,pl:mixin:APP:ending_library.mixins.json:capability.ServerPlayerGameModeMixin,pl:mixin:APP:revelationfix.mixins.json:ServerPlayerGameModeAccessor,pl:mixin:A}
+	at net.minecraft.server.network.ServerGamePacketListenerImpl.m_6371_(ServerGamePacketListenerImpl.java:1057) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,pl:accesstransformer:B,pl:EndingLibraryCore-Main:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:vp.mixins.json:ServerGamePacketListenerMixin,pl:mixin:APP:modernfix-modernfix.mixins.json:bugfix.forge_vehicle_packets.ServerGamePacketListenerImplMixin,pl:mixin:APP:jerotes.mixins.json:ServerGamePacketListenerImplMixin,pl:mixin:APP:servercore.common.mixins.json:features.misc.ServerGamePacketListenerImplMixin,pl:mixin:APP:graveyard-common.mixins.json:ServerPlayNetworkHandlerMixin,pl:mixin:APP:pehkui.mixins.json:ServerPlayNetworkHandlerMixin,pl:mixin:APP:pehkui.mixins.json:compat1204minus.ServerPlayNetworkHandlerMixin,pl:mixin:APP:pehkui.mixins.json:reach.compat1204minus.ServerPlayNetworkHandlerMixin,pl:mixin:APP:pehkui.mixins.json:reach.compat1204minus.compat119plus.ServerPlayNetworkHandlerMixin,pl:mixin:APP:bettercombat.mixins.json:ServerPlayNetworkHandlerMixin,pl:mixin:APP:mixins/common/nochatreports.mixins.json:server.MixinServerGamePacketListenerImpl,pl:mixin:APP:lootr.mixins.json:MixinServerGamePacketListenerImpl,pl:mixin:APP:tetra.mixins.json:ServerPlayNetHandlerMixin,pl:mixin:APP:packetfixer.v1_19_4.forge.mixins.json:v1_19_4_forge.ServerGamePacketListenerImplMixin,pl:mixin:A,pl:EndingLibraryCore-Main:A}
+	at net.minecraft.network.protocol.game.ServerboundUseItemOnPacket.m_5797_(ServerboundUseItemOnPacket.java:34) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,re:classloading}
+	at net.minecraft.network.protocol.game.ServerboundUseItemOnPacket.m_5797_(ServerboundUseItemOnPacket.java:8) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,re:classloading}
+	at net.minecraft.network.protocol.PacketUtils.m_263899_(PacketUtils.java:22) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,re:classloading}
+	at net.minecraft.server.TickTask.run(TickTask.java:18) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:classloading}
+	at net.minecraft.util.thread.BlockableEventLoop.m_6367_(BlockableEventLoop.java:156) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:computing_frames,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B}
+	at net.minecraft.util.thread.ReentrantBlockableEventLoop.m_6367_(ReentrantBlockableEventLoop.java:23) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:computing_frames,re:mixin,re:classloading}
+	at net.minecraft.server.MinecraftServer.m_6367_(MinecraftServer.java:770) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,re:classloading,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.m_6367_(MinecraftServer.java:161) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,re:classloading,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,pl:mixin:A}
+	at net.minecraft.util.thread.BlockableEventLoop.m_7245_(BlockableEventLoop.java:130) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:computing_frames,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.m_129961_(MinecraftServer.java:753) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,re:classloading,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.m_7245_(MinecraftServer.java:747) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,re:classloading,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,pl:mixin:A}
+	at net.minecraft.util.thread.BlockableEventLoop.m_18701_(BlockableEventLoop.java:139) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:computing_frames,pl:accesstransformer:B,re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B}
+	at net.minecraft.server.MinecraftServer.mixinextras$bridge$m_18701_$281(MinecraftServer.java) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,re:classloading,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.wrapOperation$zhh000$managedBlock(MinecraftServer.java:1856) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,re:classloading,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.m_130012_(MinecraftServer.java:733) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,re:classloading,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.m_130011_(MinecraftServer.java:665) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,re:classloading,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,pl:mixin:A}
+	at net.minecraft.server.MinecraftServer.m_206580_(MinecraftServer.java:251) ~[client-1.20.1-20230612.114412-srg.jar%23792!/:?] {re:mixin,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,re:classloading,pl:accesstransformer:B,xf:fml:xaerominimap:xaero_minecraftserver,xf:fml:xaeroworldmap:xaero_wm_minecraftserver,pl:mixin:A}
+	at java.lang.Thread.run(Thread.java:1474) ~[?:?] {re:mixin}
+Caused by: java.lang.ClassNotFoundException: dev.emi.emi.api.recipe.handler.EmiRecipeHandler
+	at jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:580) ~[?:?] {}
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:490) ~[?:?] {re:mixin}
+	at cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:137) ~[securejarhandler-2.1.10.jar:?] {}
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:490) ~[?:?] {re:mixin}
+	at cpw.mods.cl.ModuleClassLoader.loadClass(ModuleClassLoader.java:137) ~[securejarhandler-2.1.10.jar:?] {}
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:490) ~[?:?] {re:mixin}
+	... 34 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.20.1
+	Minecraft Version ID: 1.20.1
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 25.0.2, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 6323874352 bytes (6030 MiB) / 10737418240 bytes (10240 MiB) up to 10737418240 bytes (10240 MiB)
+	CPUs: 16
+	Processor Vendor: GenuineIntel
+	Processor Name: 11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz
+	Identifier: Intel64 Family 6 Model 141 Stepping 1
+	Microarchitecture: unknown
+	Frequency (GHz): 2.30
+	Number of physical packages: 1
+	Number of physical CPUs: 8
+	Number of logical CPUs: 16
+	Graphics card #0 name: GameViewer Virtual Display Adapter
+	Graphics card #0 vendor: GameViewer
+	Graphics card #0 VRAM (MB): 0.00
+	Graphics card #0 deviceId: unknown
+	Graphics card #0 versionInfo: DriverVersion=17.13.25.697
+	Graphics card #1 name: Intel(R) UHD Graphics
+	Graphics card #1 vendor: Intel Corporation (0x8086)
+	Graphics card #1 VRAM (MB): 1024.00
+	Graphics card #1 deviceId: 0x9a60
+	Graphics card #1 versionInfo: DriverVersion=30.0.101.1340
+	Graphics card #2 name: NVIDIA GeForce RTX 3050 Laptop GPU
+	Graphics card #2 vendor: NVIDIA (0x10de)
+	Graphics card #2 VRAM (MB): 4095.00
+	Graphics card #2 deviceId: 0x25a2
+	Graphics card #2 versionInfo: DriverVersion=27.21.14.6275
+	Memory slot #0 capacity (MB): 8192.00
+	Memory slot #0 clockSpeed (GHz): 2.67
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MB): 8192.00
+	Memory slot #1 clockSpeed (GHz): 2.67
+	Memory slot #1 type: DDR4
+	Virtual memory max (MB): 33577.07
+	Virtual memory used (MB): 32123.92
+	Swap memory total (MB): 17413.77
+	Swap memory used (MB): 2169.02
+	JVM Flags: 30 total; -XX:ThreadPriorityPolicy=1 -XX:+UnlockExperimentalVMOptions -XX:+EnableJVMCIProduct -XX:+EnableJVMCI -XX:-UnlockExperimentalVMOptions -Xms10G -Xmx10G -XX:SoftMaxHeapSize=10G -XX:MetaspaceSize=768M -XX:MaxMetaspaceSize=1G -XX:ConcGCThreads=3 -XX:+UseStringDeduplication -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:+DisableExplicitGC -XX:+PerfDisableSharedMem -XX:+UseCompactObjectHeaders -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=./ -XX:+UnlockExperimentalVMOptions -XX:+UseGraalJIT -XX:+EagerJVMCI -XX:CompileThresholdScaling=0.6 -XX:CICompilerCount=6 -XX:InlineSmallCode=4000 -XX:FreqInlineSize=1500 -XX:MaxInlineLevel=15 -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump -Xmn1536m -Xmx10240m
+	Loaded Shaderpack: BSL_v8.4.02.2.zip
+		Profile: MINIMUM (+0 options changed by user)
+	Server Running: true
+	Player Count: 1 / 8; [ServerPlayer['tlxsj'/2320, l='ServerLevel[新的世界]', x=6.89, y=6.50, z=-47.47]]
+	Data Packs: vanilla, mod:smsn, mod:saturn (incompatible), mod:adaptive_performance_tweaks_core (incompatible), mod:apricityui, mod:almanac, mod:stackablepotions (incompatible), mod:ftbessentials (incompatible), mod:kubejs_curios, mod:cataclysm_mux_0316 (incompatible), mod:playeranimator (incompatible), mod:backpack_plus (incompatible), mod:kubeloader, mod:hourglass (incompatible), mod:alternative_twilight, mod:goety_addition, mod:goety, mod:modernfix (incompatible), mod:asteorbar (incompatible), mod:trinketsandbaubles, mod:gateways (incompatible), mod:yungsapi, mod:stf (incompatible), mod:wstweaks (incompatible), mod:cataclysm_mux_0327 (incompatible), mod:ldlib (incompatible), mod:fdbosses (incompatible), mod:maid_sword_soaring, mod:balm, mod:immersive_armors (incompatible), mod:cloth_config (incompatible), mod:sound_physics_remastered (incompatible), mod:paraglider (incompatible), mod:embeddium, mod:torchmaster, mod:jerotes (incompatible), mod:block_factorys_bosses (incompatible), mod:irons_spells_js (incompatible), mod:celestial_core, mod:jupiter, mod:tooltips_reforged, mod:propertymodifier (incompatible), mod:enderteleport, mod:servercore (incompatible), mod:quality_equipment, mod:mynethersdelight, mod:currency, mod:oculus, mod:searchables (incompatible), mod:dooms, mod:attributeslib (incompatible), mod:noisium, mod:skillslots (incompatible), mod:thirst (incompatible), mod:constructionwand, mod:mutantmore (incompatible), mod:chimes, mod:hardernaturalhealing, mod:conditional_mixin (incompatible), mod:adorn (incompatible), mod:transition, mod:scroll_chest, mod:buckshotroulette, mod:celestisynth, mod:visual_recipe_editor, mod:trials, mod:l2library (incompatible), mod:codechickenlib (incompatible), mod:enchantinginfuser, mod:powerful_dummy, mod:smartbrainlib, mod:vvaddon (incompatible), mod:kiwi (incompatible), mod:radium, mod:confluence, mod:salwayseat (incompatible), mod:mowziesmobs, mod:l2tabs (incompatible), mod:mutantmonsters, mod:thirstcanteen (incompatible), mod:tonsofenchants (incompatible), mod:tutm, mod:customskinloader (incompatible), mod:jei, mod:irons_lib, mod:attributefix (incompatible), mod:graveyard (incompatible), mod:visualworkbench, mod:pehkui (incompatible), mod:alex_caves_dimensions, mod:flerovium (incompatible), mod:caelus (incompatible), mod:paxi, mod:tetratic_combat_expanded, mod:l2harvester60x (incompatible), mod:naturescompass, mod:l2screentracker (incompatible), mod:champions (incompatible), mod:oelib, mod:farmingforblockheads, mod:crockpot, mod:starlight (incompatible), mod:iceandfire, mod:catalogue (incompatible), mod:questsadditions, mod:puzzlesaccessapi, mod:opencurios, mod:forge, mod:skullskinless (incompatible), mod:vp (incompatible), mod:ironchest, mod:dungeons_arise, mod:right_click_get_crops, mod:time_flows_backward, mod:terrablender, mod:mousetweaks, mod:roughtweaks (incompatible), mod:forgeconfigscreens, mod:bettercombat (incompatible), mod:nochatreports (incompatible), mod:cubes_without_borders (incompatible), mod:fdlib (incompatible), mod:justenoughbreeding, mod:spectrelib (incompatible), mod:chickenchunks (incompatible), mod:astikorcarts (incompatible), mod:kotlinforforge (incompatible), mod:jeiintegration (incompatible), mod:traveloptics, mod:shadowizardlib (incompatible), mod:polymorph (incompatible), mod:fix_attack_lag, mod:entityculling, mod:mob_weapon_api (incompatible), mod:xaeroplus (incompatible), mod:xaerominimap (incompatible), mod:banit, mod:immediatelyfast (incompatible), mod:fastfurnace (incompatible), mod:gbf, mod:appleskin (incompatible), mod:lootr, mod:modernui, mod:puzzleslib, mod:aquaculture, mod:utilityworlds, mod:l2harvester05x (incompatible), mod:cosmeticarmorreworked, mod:fruitsdelight (incompatible), mod:opack2reload (incompatible), mod:aquamirae (incompatible), mod:tetra (incompatible), mod:tetraclip (incompatible), mod:totw_modded, mod:skyvillages (incompatible), mod:kuma_api, mod:transmog (incompatible), mod:wormhole_artifact, mod:auratip, mod:dragonheart, mod:incontrol, mod:dimensionalsycnfixes (incompatible), mod:solmaiddream, mod:tipsmod (incompatible), mod:soulbound (incompatible), mod:immersive_aircraft (incompatible), mod:sophisticatedcore (incompatible), mod:gpumemleakfix (incompatible), mod:bowinfinityfix, mod:pigzilla, mod:nanhealthfixer (incompatible), mod:controlling (incompatible), mod:xaeroworldmap (incompatible), mod:placebo (incompatible), mod:citadel (incompatible), mod:alexsmobs (incompatible), mod:tetrajs, mod:cobweb (incompatible), mod:soul_fire_d (incompatible), mod:bookshelf, mod:itemzoom, mod:biomespy, mod:sophisticatedbackpacks (incompatible), mod:simplejadetetra, mod:relics, mod:jeed (incompatible), mod:enchantmentdisabletag, mod:golemdungeons (incompatible), mod:quick_pack, mod:carryon (incompatible), mod:melody (incompatible), mod:petconnect, mod:goetyarcana, mod:fzzy_config (incompatible), mod:particle_core (incompatible), mod:l2damagetracker (incompatible), mod:integration (incompatible), mod:twilightforest, mod:konkrete (incompatible), mod:rsinfinitybooster (incompatible), mod:refinedstorage, mod:farmersdelight, mod:cuisinedelight (incompatible), mod:ends_delight, mod:fastipping (incompatible), mod:endrem (incompatible), mod:architectbypass (incompatible), mod:extraholopage, mod:autofirebowenchant, mod:eeeabsmobs, mod:lionfishapi (incompatible), mod:snowwaifu (incompatible), mod:cataclysm (incompatible), mod:touhou_little_maid, mod:touhou_little_maid_spell, mod:patchouli (incompatible), mod:geotagged_screenshots (incompatible), mod:revelationfix, mod:ending_library (incompatible), mod:goety_revelation, mod:collective, mod:cerbons_api, mod:witherstormmod, mod:ftbultimine (incompatible), mod:gobber2, mod:enigmaticlegacy (incompatible), mod:lootjs, mod:twilightdelight (incompatible), mod:inventoryprofilesnext (incompatible), mod:architectury (incompatible), mod:doapi (incompatible), mod:vinery (incompatible), mod:ftblibrary (incompatible), mod:too_many_bows, mod:kubejsadditions (incompatible), mod:ftbteams (incompatible), mod:warwither, mod:cupboard (incompatible), mod:firstjoinmessage, mod:lanserverproperties (incompatible), mod:framework, mod:ante (incompatible), mod:polylib, mod:letmedespawn, mod:yeetusexperimentus (incompatible), mod:dreadsteel (incompatible), mod:betteradvancements (incompatible), mod:wolfenchantmentlib, mod:lm, mod:rhino (incompatible), mod:kubejs (incompatible), mod:probejs_legacy (incompatible), mod:eventjs (incompatible), mod:merchantjs, mod:inventoryspam (incompatible), mod:trashslot, mod:structure_preview, mod:octolib, mod:itemfilters (incompatible), mod:ftbquests (incompatible), mod:ftbxmodcompat (incompatible), mod:ftbquestsentityvis, mod:cataclysm_mux (incompatible), mod:trender, mod:obscure_api (incompatible), mod:chloride, mod:waystones, mod:clumps (incompatible), mod:ali, mod:leawind_third_person, mod:crackerslib (incompatible), mod:badmobs (incompatible), mod:ftbbackups2 (incompatible), mod:celestial_overhaul, mod:explorerscompass, mod:tetra_addition, mod:bosses_of_mass_destruction, mod:azurelib, mod:uranus, mod:watut, mod:travelerstitles, mod:meetyourfight (incompatible), mod:gpu_tape (incompatible), mod:factory_api (incompatible), mod:betterfurnacesreforged (incompatible), mod:alexscaves, mod:enchdesc (incompatible), mod:libipn (incompatible), mod:mysterious_mountain_lib (incompatible), mod:jade (incompatible), mod:l2harvester (incompatible), mod:modulargolems (incompatible), mod:curio_enchantment, mod:iceberg (incompatible), mod:mutil, mod:art_of_forging, mod:fastbench (incompatible), mod:mr_malfu_combatanimation, mod:legendary_monsters, mod:irons_spellbooks (incompatible), mod:jecharacters (incompatible), mod:fancymenu (incompatible), mod:coroutil (incompatible), mod:ferritecore (incompatible), mod:torchesbecomesunlight, mod:curios (incompatible), mod:l2artifacts (incompatible), mod:geckolib, mod:umapyoi (incompatible), mod:uma_maid, mod:enigmaticaddons, mod:enigmaticdelicacy, mod:inventoryhud (incompatible), mod:yet_another_config_lib_v3 (incompatible), mod:solcarrot (incompatible), mod:nbtedit (incompatible), mod:enhancedcelestials (incompatible), mod:corgilib, mod:l2itemselector (incompatible), mod:allarrowsinfinityfix (incompatible), mod:refinedstorageaddons, mod:packetfixer (incompatible), mod:rosmontislib, mod:healingcampfire, mod:openloader (incompatible), mod:imblocker, mod:presencefootsteps (incompatible), data/aaa (incompatible), data/jgb (incompatible), mutantmonsters:biome_modifications, soul_fire_d:campfire_tags, soul_fire_d:fire_source_tags, mod:spark (incompatible), mod:searchonmcmod, mod:immersive_optimization (incompatible), mod:aotake_sweep, mod:photon (incompatible), mod:alternate_current, mod:darkaltarui, mod:soph_upgrade_addons, mod:tetra_modify_core, mod:constantmusic (incompatible)
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Stable
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'forge'; Server brand changed to 'forge'
+	Launched Version: 猪咪大冒险3.26
+	ModLauncher: 10.0.9+10.0.9+main.dcd20f30
+	ModLauncher launch target: forgeclient
+	ModLauncher naming: srg
+	ModLauncher services: 
+		mixin-0.8.5.jar mixin PLUGINSERVICE 
+		eventbus-6.2.33.jar eventbus PLUGINSERVICE 
+		fmlloader-1.20.1-47.4.20.jar slf4jfixer PLUGINSERVICE 
+		fmlloader-1.20.1-47.4.20.jar object_holder_definalize PLUGINSERVICE 
+		fmlloader-1.20.1-47.4.20.jar runtime_enum_extender PLUGINSERVICE 
+		fmlloader-1.20.1-47.4.20.jar capability_token_subclass PLUGINSERVICE 
+		accesstransformers-8.0.4.jar accesstransformer PLUGINSERVICE 
+		fmlloader-1.20.1-47.4.20.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-10.0.9.jar vaultpatcher TRANSFORMATIONSERVICE 
+		modlauncher-10.0.9.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-10.0.9.jar redirector TRANSFORMATIONSERVICE 
+		modlauncher-10.0.9.jar fml TRANSFORMATIONSERVICE 
+		modlauncher-10.0.9.jar customskinloader-bootstrap TRANSFORMATIONSERVICE 
+		modlauncher-10.0.9.jar hotai TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		minecraft@1.0
+		kotlinforforge@4.12.0
+		lowcodefml@null
+		javafml@null
+	Mod List: 
+		[优化][救救我的答辩网络] smsn-forge-1.4.2-1.20.1.jar        |Save My Shit Network          |smsn                          |1.4.2-1.20.1        |DONE      |Manifest: NOSIGNATURE
+		[优化]saturn-mc1.20.1-0.1.3.jar                     |Saturn                        |saturn                        |0.1.3               |DONE      |Manifest: NOSIGNATURE
+		adaptive_performance_tweaks_core_1.20.1-11.6.1.jar|APTweaks: Core                |adaptive_performance_tweaks_co|11.6.1              |DONE      |Manifest: NOSIGNATURE
+		[晴雪UI] ApricityUI-forge-1.20.1-1.1.6-dev.jar      |ApricityUI                    |apricityui                    |1.1.6-dev           |DONE      |Manifest: NOSIGNATURE
+		almanac-1.20.x-forge-1.0.2.jar                    |Almanac                       |almanac                       |1.0.2               |DONE      |Manifest: NOSIGNATURE
+		[药水堆叠]Stackable Potions-forge-1.20.1-1.0.0.jar    |Stackable Potions             |stackablepotions              |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		ftb-essentials-forge-2001.2.4.jar                 |FTB Essentials                |ftbessentials                 |2001.2.4            |DONE      |Manifest: NOSIGNATURE
+		[饰品魔改]kubejs_curios_forge_1.20.1-1.0.4.jar        |KubeJSCurios                  |kubejs_curios                 |1.0.4               |DONE      |Manifest: NOSIGNATURE
+		cataclysm_mux_0316-0.0.6.jar                      |Cataclysm Mux 0316            |cataclysm_mux_0316            |0.0.6               |DONE      |Manifest: NOSIGNATURE
+		[更好的战斗前置]player-animation-lib-forge-1.0.2-rc1+1.20|Player Animator               |playeranimator                |1.0.2-rc1+1.20      |DONE      |Manifest: NOSIGNATURE
+		[背背加]Backpack Plus-forge-1.20.1-1.0.jar           |Backpack Plus                 |backpack_plus                 |1.0                 |DONE      |Manifest: NOSIGNATURE
+		kubeloader-0.1.0-Alpha.jar                        |KubeLoader                    |kubeloader                    |0.1.0-Alpha         |DONE      |Manifest: NOSIGNATURE
+		[沙漏] hourglass-1.20-1.2.1.1.jar                   |Hourglass                     |hourglass                     |1.2.1.1             |DONE      |Manifest: NOSIGNATURE
+		[暮色另类]alternative_twilight-1.20.1-1.1.0.jar       |Alternative Twilight Mod      |alternative_twilight          |1.20.1-1.1.0        |DONE      |Manifest: NOSIGNATURE
+		[诡厄巫法附属]goety_addition-1.0.1.jar                  |Goety Addition                |goety_addition                |1.0.1               |DONE      |Manifest: NOSIGNATURE
+		[诡厄巫法] goety-2.5.54.5.jar                         |Goety                         |goety                         |2.5.54.5            |DONE      |Manifest: NOSIGNATURE
+		[现代化修复] modernfix-forge-5.27.51+mc1.20.1.jar      |ModernFix                     |modernfix                     |5.27.51+mc1.20.1    |DONE      |Manifest: NOSIGNATURE
+		[Asteor的状态栏和血量显示] asteorbar-forge-1.20.1-1.5.3.jar|AsteorBar                     |asteorbar                     |1.5.3               |DONE      |Manifest: NOSIGNATURE
+		[饰品与小玩意：重铸]trinketsandbaubles-1.3.1.jar           |Trinkets and Baubles Reforked |trinketsandbaubles            |1.3.1               |DONE      |Manifest: NOSIGNATURE
+		[永恒之门] GatewaysToEternity-1.20.1-4.2.6.jar        |Gateways To Eternity          |gateways                      |4.2.6               |DONE      |Manifest: NOSIGNATURE
+		[旅行标题前置]YungsApi-1.20-Forge-4.0.6.jar             |YUNG's API                    |yungsapi                      |1.20-Forge-4.0.6    |DONE      |Manifest: NOSIGNATURE
+		[国创][启动时间]stf-cn.ksmcbrigade.jar                  |StartupTimeForge              |stf                           |1.0                 |DONE      |Manifest: NOSIGNATURE
+		[凋灵骷髅调整] WitherSkeletonTweaks-1.20.1-9.1.0.jar    |Wither Skeleton Tweaks        |wstweaks                      |9.1.0               |DONE      |Manifest: NOSIGNATURE
+		cataclysm_mux_0327-0.0.6.jar                      |Cataclysm Mux 0327            |cataclysm_mux_0327            |0.0.6               |DONE      |Manifest: NOSIGNATURE
+		ldlib-forge-1.20.1-1.0.50.jar                     |LowDragLib                    |ldlib                         |1.0.50              |DONE      |Manifest: NOSIGNATURE
+		[qp觉醒]fdbosses-2.0.8-1.20.1.jar                   |Qliphoth Awakening            |fdbosses                      |2.0.8               |DONE      |Manifest: NOSIGNATURE
+		[女仆御剑] maid_sword_soaring-1.20.1-forge-1.0.7.jar  |Maid Sword Soaring            |maid_sword_soaring            |1.0.7               |DONE      |Manifest: NOSIGNATURE
+		[传送石碑前置]balm-forge-1.20.1-7.3.38-all.jar          |Balm                          |balm                          |7.3.38              |DONE      |Manifest: NOSIGNATURE
+		immersive_armors-1.7.1+1.20.1-forge.jar           |Immersive Armors              |immersive_armors              |1.7.1+1.20.1        |DONE      |Manifest: NOSIGNATURE
+		cloth-config-11.1.136-forge.jar                   |Cloth Config v10 API          |cloth_config                  |11.1.136            |DONE      |Manifest: NOSIGNATURE
+		[物理声效重制版]sound-physics-remastered-forge-1.20.1-1.5|Sound Physics Remastered      |sound_physics_remastered      |1.20.1-1.5.1        |DONE      |Manifest: NOSIGNATURE
+		[滑翔伞] Paraglider-forge-20.1.3.jar                 |Paraglider                    |paraglider                    |20.1.3              |DONE      |Manifest: NOSIGNATURE
+		[优化][铷]embeddium-0.3.31+mc1.20.1.jar              |Embeddium                     |embeddium                     |0.3.31+mc1.20.1     |DONE      |Manifest: NOSIGNATURE
+		[火炬大师]torchmaster-20.1.9.jar                      |Torchmaster                   |torchmaster                   |20.1.9              |DONE      |Manifest: NOSIGNATURE
+		[Jerotes仓库] jerotes-1.20.1-1.2.6.jar              |JerotesWarehouse              |jerotes                       |1.2.6               |DONE      |Manifest: NOSIGNATURE
+		block_factorys_bosses-2.1.2-forge-1.20.1.jar      |Bosses'Rise                   |block_factorys_bosses         |2.1.2               |DONE      |Manifest: NOSIGNATURE
+		irons_spells_js-1.20.1-6.5-3.14-r2-release.jar    |Iron's Spellbooks KubeJS      |irons_spells_js               |6.5-3.14-r2         |DONE      |Manifest: NOSIGNATURE
+		[国创][星月核心] celestial_core-1.3.5.jar               |Celestial Core                |celestial_core                |1.3.5               |DONE      |Manifest: NOSIGNATURE
+		jupiter-2.3.7-1.20.1-forge.jar                    |Jupiter                       |jupiter                       |2.3.7               |DONE      |Manifest: NOSIGNATURE
+		[提示框：重铸] tooltips_reforged-1.7-1.20.1-forge.jar   |Tooltips Reforged             |tooltips_reforged             |1.7                 |DONE      |Manifest: NOSIGNATURE
+		propertymodifier-1.20.1-0.1-all.jar               |Property Modifier             |propertymodifier              |0.3.3               |DONE      |Manifest: NOSIGNATURE
+		[国创[末影阅历]]enderteleport-1.0.0.jar                 |Ender Teleport Enchantment    |enderteleport                 |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		[优化][服务端等]servercore-forge-1.5.2+1.20.1.jar       |ServerCore                    |servercore                    |1.5.2+1.20.1        |DONE      |Manifest: NOSIGNATURE
+		[火花] spark-1.10.53-forge.jar                      |spark                         |spark                         |1.10.53             |DONE      |Manifest: NOSIGNATURE
+		[装备品质]quality_equipment-1.6-forge_neoforge-1.20.1.|Quality Equipment             |quality_equipment             |1.6                 |DONE      |Manifest: NOSIGNATURE
+		MyNethersDelight-1.20.1-0.1.8.jar                 |My Nether's Delight           |mynethersdelight              |1.20.1-1.7.5        |DONE      |Manifest: NOSIGNATURE
+		[货币多多2]Never-Enough-Currenecy[Forge]1.20.1.jar    |Never Enough Currency 2 (FORGE|currency                      |1.0.1               |DONE      |Manifest: NOSIGNATURE
+		[光影加载器]mekalus-mc1.20.1-1.8.0.1.jar               |Mekalus (Oculus)              |oculus                        |1.8.0.1             |DONE      |Manifest: NOSIGNATURE
+		[按键冲突显示前置]Searchables-forge-1.20.1-1.0.3.jar      |Searchables                   |searchables                   |1.0.3               |DONE      |Manifest: NOSIGNATURE
+		[十日终焉：物品] dooms-1.0.0.jar                         |dooms                         |dooms                         |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		ApothicAttributes-1.20.1-1.3.7.jar                |Apothic Attributes            |attributeslib                 |1.3.7               |DONE      |Manifest: NOSIGNATURE
+		[优化]noisium-forge-2.3.0+mc1.20-1.20.1.jar         |Noisium                       |noisium                       |2.3.0+mc1.20-1.20.1 |DONE      |Manifest: NOSIGNATURE
+		[技能槽] SkillSlots-1.20.1-forge-2.1.1.jar           |Skill Slots                   |skillslots                    |2.1.1+forge         |DONE      |Manifest: NOSIGNATURE
+		[口渴]ThirstWasTaken-1.20.1-1.4.0.jar               |Thirst was Taken              |thirst                        |1.20.1-1.4.0        |DONE      |Manifest: NOSIGNATURE
+		constructionwand-1.20.1-2.11.jar                  |Construction Wand             |constructionwand              |1.20.1-2.11         |DONE      |Manifest: NOSIGNATURE
+		[更多突变生物] mutantmore-1.20.1-early_access-2.0.0.jar |Mutant More                   |mutantmore                    |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		[铃声]Chimes-v2.0.1-1.20.1.jar                      |Chimes                        |chimes                        |2.0.1               |DONE      |Manifest: NOSIGNATURE
+		[更难的自然愈合]hardernaturalhealing-1.20-46.1.13.jar    |Harder Natural Healing Mod    |hardernaturalhealing          |46.1.13             |DONE      |Manifest: NOSIGNATURE
+		conditional-mixin-forge-0.6.4.jar                 |conditional mixin             |conditional_mixin             |0.6.4               |DONE      |Manifest: NOSIGNATURE
+		[装饰]Adorn-5.0.1+1.20.1-forge.jar                  |Adorn                         |adorn                         |5.0.1+1.20.1        |DONE      |Manifest: NOSIGNATURE
+		TRansition-1.0.21-1.20.1-forge-SNAPSHOT.jar       |TRansition                    |transition                    |1.0.21              |DONE      |Manifest: NOSIGNATURE
+		ScrollChest-1.0.0.jar                             |ScrollChest                   |scroll_chest                  |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		[恶魔轮盘赌] BuckshotRoulette-1.1.5.jar                |Buckshot Roulette             |buckshotroulette              |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		[天神剑技] celestisynth-1.20.1-1.3.4-all.jar          |Celestisynth                  |celestisynth                  |1.20.1-1.3.4        |DONE      |Manifest: NOSIGNATURE
+		[可视化配方编辑]visual_recipe_editor1.20.1-1.1.0.jar     |可视化配方编写                       |visual_recipe_editor          |1.1.0               |DONE      |Manifest: NOSIGNATURE
+		[MC百科搜索] searchonmcmod-forge-1.20.x-0.1.0.jar     |Search on MCMOD               |searchonmcmod                 |0.1.0               |DONE      |Manifest: NOSIGNATURE
+		[试炼密室]Trials-2.3.2.jar                            |Trials Chambers               |trials                        |2.3.2               |DONE      |Manifest: NOSIGNATURE
+		[国创][傀儡装配前置]l2library-2.5.3.jar                   |L2 Library                    |l2library                     |2.5.3               |DONE      |Manifest: NOSIGNATURE
+		CodeChickenLib-1.20.1-4.4.0.516-universal.jar     |CodeChicken Lib               |codechickenlib                |4.4.0.516           |DONE      |Manifest: 31:e6:db:63:47:4a:6e:e0:0a:2c:11:d1:76:db:4e:82:ff:56:2d:29:93:d2:e5:02:bd:d3:bd:9d:27:47:a5:71
+		[附魔灌注台]EnchantingInfuser-v8.0.3-1.20.1-Forge.jar  |Enchanting Infuser            |enchantinginfuser             |8.0.3               |DONE      |Manifest: 9a:09:85:98:65:c4:8c:11:c5:49:f6:d6:33:23:39:df:8d:b4:ff:92:84:b8:bd:a5:83:9f:ac:7f:2a:d1:4b:6a
+		powerful_dummy-20-0.0.9.jar                       |Powerful Dummy                |powerful_dummy                |20-0.0.9            |DONE      |Manifest: NOSIGNATURE
+		SmartBrainLib-forge-1.20.1-1.15.jar               |SmartBrainLib                 |smartbrainlib                 |1.15                |DONE      |Manifest: NOSIGNATURE
+		[Tetra属性拓展]]vvaddon-1.20.1-alpha3.0.1.jar         |VVAddon                       |vvaddon                       |3.0.1               |DONE      |Manifest: NOSIGNATURE
+		Kiwi-1.20.1-Forge-11.10.1.jar                     |Kiwi Library                  |kiwi                          |11.10.1+forge       |DONE      |Manifest: NOSIGNATURE
+		[优化][镭] radium-mc1.20.1-0.12.4+git.26c9d8e.jar    |Radium                        |radium                        |0.12.4+git.26c9d8e  |DONE      |Manifest: NOSIGNATURE
+		[国创][泰拉饰品]TerraCurio-0.1.12-all.jar               |Terra Curio                   |confluence                    |0.1.12              |DONE      |Manifest: NOSIGNATURE
+		[吃不停]AlwaysEat-5.2.jar                            |AlwaysEat                     |salwayseat                    |5.2                 |DONE      |Manifest: NOSIGNATURE
+		[Mowzie的生物] mowziesmobs-1.8.2.jar                 |Mowzie's Mobs                 |mowziesmobs                   |1.8.2               |DONE      |Manifest: NOSIGNATURE
+		l2tabs-0.3.3.jar                                  |L2 Tabs                       |l2tabs                        |0.3.3               |DONE      |Manifest: NOSIGNATURE
+		[突变生物]MutantMonsters-v8.0.8-1.20.1-Forge.jar      |Mutant Monsters               |mutantmonsters                |8.0.8               |DONE      |Manifest: 9a:09:85:98:65:c4:8c:11:c5:49:f6:d6:33:23:39:df:8d:b4:ff:92:84:b8:bd:a5:83:9f:ac:7f:2a:d1:4b:6a
+		[口渴-水壶] thirstcanteen-1.20.1-3.5.jar              |Thirst Canteen                |thirstcanteen                 |1.20.1-3.5          |DONE      |Manifest: NOSIGNATURE
+		[Tons的附魔]TonsOfEnchants-1.20.1-1.0CN.jar          |Tons Of Enchants              |tonsofenchants                |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		[时间维系者] tutm-1.0.6.jar                            |Fading Time                   |tutm                          |1.0.6               |DONE      |Manifest: NOSIGNATURE
+		CustomSkinLoader-Common.jar                       |CustomSkinLoader              |customskinloader              |15.0.1              |DONE      |Manifest: NOSIGNATURE
+		jei-1.20.1-forge-15.20.0.130.jar                  |Just Enough Items             |jei                           |15.20.0.130         |DONE      |Manifest: NOSIGNATURE
+		irons_lib-1.20.1-1.0.2.jar                        |Iron's Lib                    |irons_lib                     |1.20.1-1.0.2        |DONE      |Manifest: NOSIGNATURE
+		[属性修复]AttributeFix-Forge-1.20.1-21.0.5.jar        |AttributeFix                  |attributefix                  |21.0.5              |DONE      |Manifest: eb:c4:b1:67:8b:f9:0c:db:dc:4f:01:b1:8e:61:64:39:4c:10:85:0b:a6:c4:c7:48:f0:fa:95:f2:cb:08:3a:e5
+		[墓园]The_Graveyard_3.1_(FORGE)_for_1.20.1.jar      |The Graveyard                 |graveyard                     |3.1                 |DONE      |Manifest: NOSIGNATURE
+		[可视化工作台] VisualWorkbench-v8.0.1-1.20.1-Forge.jar  |Visual Workbench              |visualworkbench               |8.0.1               |DONE      |Manifest: 9a:09:85:98:65:c4:8c:11:c5:49:f6:d6:33:23:39:df:8d:b4:ff:92:84:b8:bd:a5:83:9f:ac:7f:2a:d1:4b:6a
+		Pehkui-3.8.2+1.20.1-forge.jar                     |Pehkui                        |pehkui                        |3.8.2+1.20.1-forge  |DONE      |Manifest: NOSIGNATURE
+		[Alex的洞穴：维度]Dimensions-of-Alex's-Caves-1.20.1-1.0.|Dimensions of Alex's Caves    |alex_caves_dimensions         |1.0.4               |DONE      |Manifest: NOSIGNATURE
+		[优化]flerovium-forge-1.20.1-1.2.19-all.jar         |Flerovium                     |flerovium                     |1.2.19              |DONE      |Manifest: NOSIGNATURE
+		caelus-forge-3.2.0+1.20.1.jar                     |Caelus API                    |caelus                        |3.2.0+1.20.1        |DONE      |Manifest: NOSIGNATURE
+		[数据包全局加载]Paxi-1.20-Forge-4.0.jar                  |Paxi                          |paxi                          |1.20-Forge-4.0      |DONE      |Manifest: NOSIGNATURE
+		[更好的战斗tetra兼容]tetratic-combat-expanded-1.20-2.8.3.|Tetratic Combat Expanded      |tetratic_combat_expanded      |2.8.3               |DONE      |Manifest: NOSIGNATURE
+		l2harvester60x-0.1.2.jar                          |Harvester Compat 60x          |l2harvester60x                |0.1.2               |DONE      |Manifest: NOSIGNATURE
+		[优化][实体加载] immersive_optimization-forge-1.20.1-0.1|Immersive Optimization        |immersive_optimization        |0.1.6               |DONE      |Manifest: NOSIGNATURE
+		[自然罗盘／生物群系指南针] NaturesCompass-1.20.1-1.12.0-forge.|Nature's Compass              |naturescompass                |1.20.1-1.12.0-forge |DONE      |Manifest: NOSIGNATURE
+		l2screentracker-0.1.4.jar                         |L2 Screen Tracker             |l2screentracker               |0.1.4               |DONE      |Manifest: NOSIGNATURE
+		[冠军强敌]champions-forge-1.20.1-2.1.7.0-beta+0.jar   |Champions                     |champions                     |1.20.1-2.1.7.0-beta+|DONE      |Manifest: NOSIGNATURE
+		OELib-forge-1.20.1-0.2.4.jar                      |OELib                         |oelib                         |0.2.4               |DONE      |Manifest: NOSIGNATURE
+		[农场贸易] farmingforblockheads-forge-1.20.1-14.0.4.ja|Farming for Blockheads        |farmingforblockheads          |14.0.4              |DONE      |Manifest: NOSIGNATURE
+		CrockPot-1.20.1-1.1.1-release.jar                 |CrockPot                      |crockpot                      |1.1.1               |DONE      |Manifest: NOSIGNATURE
+		[竹叶清] aotake_sweep-forge-1.20.1-1.1.1.jar         |��Ҷ��                         |aotake_sweep                  |1.20.1-1.1.1        |DONE      |Manifest: NOSIGNATURE
+		[优化][星光] starlight-1.1.2+forge.1cda73c.jar        |Starlight                     |starlight                     |1.1.2+forge.1cda73c |DONE      |Manifest: NOSIGNATURE
+		IceAndFireCE-1.2.5-1.20.1-forge.jar               |Ice And Fire Community Edition|iceandfire                    |1.2.5               |DONE      |Manifest: NOSIGNATURE
+		[模组目录] catalogue-forge-1.20.1-1.8.0.jar           |Catalogue                     |catalogue                     |1.8.0               |DONE      |Manifest: 0d:78:5f:44:c0:47:0c:8c:e2:63:a3:04:43:d4:12:7d:b0:7c:35:37:dc:40:b1:c1:98:ec:51:eb:3b:3c:45:99
+		[任务拓展]questsadditions-1.4.7.jar                   |Quests Additions              |questsadditions               |0.0NONE             |DONE      |Manifest: NOSIGNATURE
+		puzzlesaccessapi-forge-20.1.1.jar                 |Puzzles Access Api            |puzzlesaccessapi              |20.1.1              |DONE      |Manifest: NOSIGNATURE
+		[打开生物饰品栏]opencurios-forge-1.20.1-1.0-SNAPSHOT.jar |OpenCurios                    |opencurios                    |1.0-SNAPSHOT        |DONE      |Manifest: NOSIGNATURE
+		forge-1.20.1-47.4.20-universal.jar                |Forge                         |forge                         |47.4.20             |DONE      |Manifest: NOSIGNATURE
+		[头颅无皮肤／易颜得帧] skullskinless-1.20.1-1.0.0.jar       |SkullSkinless                 |skullskinless                 |1.20.1-1.0.0        |DONE      |Manifest: NOSIGNATURE
+		[现实的遗迹]VestigesOfThePresent 1.20.1-1.7.1.jar      |Vestiges of the Present       |vp                            |1.7.1               |DONE      |Manifest: NOSIGNATURE
+		[更多箱子] ironchest-1.20.1-14.4.4.jar                |Iron Chests                   |ironchest                     |1.20.1-14.4.4       |DONE      |Manifest: NOSIGNATURE
+		[地牢浮现之时] DungeonsArise-1.20.x-2.1.58-release.jar  |When Dungeons Arise           |dungeons_arise                |2.1.58-1.20.x       |DONE      |Manifest: NOSIGNATURE
+		client-1.20.1-20230612.114412-srg.jar             |Minecraft                     |minecraft                     |1.20.1              |DONE      |Manifest: a1:d4:5e:04:4f:d3:d6:e0:7b:37:97:cf:77:b0:de:ad:4a:47:ce:8c:96:49:5f:0a:cf:8c:ae:b2:6d:4b:8a:3f
+		[右键收取农作物]right_click_get_crops-1.20.1-1.6.0.12.jar|Right Click, Get Crops        |right_click_get_crops         |1.6.0               |DONE      |Manifest: NOSIGNATURE
+		[时间回溯]time_flows_backward-1.0.0-forge-1.20.1.jar  |Time flows backward           |time_flows_backward           |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		TerraBlender-forge-1.20.1-3.0.1.10.jar            |TerraBlender                  |terrablender                  |3.0.1.10            |DONE      |Manifest: NOSIGNATURE
+		MouseTweaks-forge-mc1.20.1-2.25.1.jar             |Mouse Tweaks                  |mousetweaks                   |2.25.1              |DONE      |Manifest: NOSIGNATURE
+		[难度调整]Rough_Tweaks_Revamped-1.20.x-1.1.2.jar      |Rough Tweaks Revamped         |roughtweaks                   |1.20.x-1.1.2        |DONE      |Manifest: NOSIGNATURE
+		[模组配置界面]ForgeConfigScreens-v8.0.2-1.20.1-Forge.jar|Forge Config Screens          |forgeconfigscreens            |8.0.2               |DONE      |Manifest: 9a:09:85:98:65:c4:8c:11:c5:49:f6:d6:33:23:39:df:8d:b4:ff:92:84:b8:bd:a5:83:9f:ac:7f:2a:d1:4b:6a
+		[更好的战斗]bettercombat-forge-1.9.0+1.20.1.jar        |Better Combat                 |bettercombat                  |1.9.0+1.20.1        |DONE      |Manifest: NOSIGNATURE
+		[禁用聊天举报] NoChatReports-FORGE-1.20.1-v2.2.2.jar    |No Chat Reports               |nochatreports                 |1.20.1-v2.2.2       |DONE      |Manifest: NOSIGNATURE
+		cwb-forge-3.0.0+mc1.20.jar                        |Cubes Without Borders         |cubes_without_borders         |3.0.0+mc1.20        |DONE      |Manifest: NOSIGNATURE
+		[前置][qp觉醒]fdlib-1.0.4-1.20.1.jar                  |FDLib                         |fdlib                         |1.0.4               |DONE      |Manifest: NOSIGNATURE
+		[JE爱]justenoughbreeding-forge-1.20.1-3.0.0.jar    |Just Enough Breeding          |justenoughbreeding            |3.0.0               |DONE      |Manifest: NOSIGNATURE
+		spectrelib-forge-0.13.17+1.20.1.jar               |SpectreLib                    |spectrelib                    |0.13.17+1.20.1      |DONE      |Manifest: NOSIGNATURE
+		[区块载入器] ChickenChunks-1.20.1-2.10.0.100-universal.|ChickenChunks                 |chickenchunks                 |2.10.0.100          |DONE      |Manifest: NOSIGNATURE
+		astikorcarts-1.20.1-1.1.8.jar                     |AstikorCarts Redux            |astikorcarts                  |1.1.8               |DONE      |Manifest: NOSIGNATURE
+		kffmod-4.12.0.jar                                 |Kotlin For Forge              |kotlinforforge                |4.12.0              |DONE      |Manifest: NOSIGNATURE
+		[JEI扩展]jeiintegration_1.20.1-10.0.0.jar           |JEI Integration               |jeiintegration                |10.0.0              |DONE      |Manifest: NOSIGNATURE
+		[T.O铁魔法]traveloptics-6.3.0-1.20.1.jar             |T.O Magic 'n Extras           |traveloptics                  |6.3.0-1.20.1        |DONE      |Manifest: NOSIGNATURE
+		shadowizardlib-1.20.1-1.3.1.jar                   |ShadowizardLib                |shadowizardlib                |1.20.1-1.3.1        |DONE      |Manifest: NOSIGNATURE
+		[多态合成] polymorph-forge-0.49.10+1.20.1.jar         |Polymorph                     |polymorph                     |0.49.10+1.20.1      |DONE      |Manifest: NOSIGNATURE
+		[优化][高伤害卡顿修复]fix_attack_lag-1.2.0-1.20.1.jar      |Fix Attack Lag                |fix_attack_lag                |1.2.0-1.20.1        |DONE      |Manifest: NOSIGNATURE
+		[优化][实体渲染机制优化] entityculling-forge-1.10.5-mc1.20.1|EntityCulling                 |entityculling                 |1.10.5              |DONE      |Manifest: NOSIGNATURE
+		mob_weapon_api-0.2.22.jar                         |Mob Weapon API                |mob_weapon_api                |0.2.22              |DONE      |Manifest: NOSIGNATURE
+		[Xaero的地图增强] XaeroPlus-2.26.10+forge-1.20.1-WM1.39|XaeroPlus                     |xaeroplus                     |2.26.10             |DONE      |Manifest: NOSIGNATURE
+		[Xaero的小地图] Xaeros_Minimap_25.2.6_Forge_1.20.jar  |Xaero's Minimap               |xaerominimap                  |25.2.6              |DONE      |Manifest: NOSIGNATURE
+		[干掉它！] banit-1.0.jar                              |BanIt                         |banit                         |1.0                 |DONE      |Manifest: NOSIGNATURE
+		[优化]ImmediatelyFast-Forge-1.5.4+1.20.4.jar        |ImmediatelyFast               |immediatelyfast               |1.5.4+1.20.4        |DONE      |Manifest: NOSIGNATURE
+		[熔炉性能优化] FastFurnace-1.20.1-8.0.2.jar             |FastFurnace                   |fastfurnace                   |8.0.2               |DONE      |Manifest: NOSIGNATURE
+		gbf-1.0.1.jar                                     |GeckoBetterFPS                |gbf                           |1.0.1               |DONE      |Manifest: NOSIGNATURE
+		[苹果皮] appleskin-forge-mc1.20.1-2.5.1.jar          |AppleSkin                     |appleskin                     |2.5.1+mc1.20.1      |DONE      |Manifest: NOSIGNATURE
+		lootr-forge-1.20-0.7.35.94.jar                    |Lootr                         |lootr                         |0.7.35.94           |DONE      |Manifest: NOSIGNATURE
+		[国创][现代化 UI] ModernUI-Forge-1.20.1-3.12.0.1-univer|Modern UI                     |modernui                      |3.12.0.1            |DONE      |Manifest: 01:c4:52:25:b1:6e:5f:ac:fe:88:35:7e:cf:65:2f:69:1d:56:db:2b:93:f8:dd:7c:93:47:04:8c:e4:22:13:91
+		PuzzlesLib-v8.1.33-1.20.1-Forge.jar               |Puzzles Lib                   |puzzleslib                    |8.1.33              |DONE      |Manifest: 9a:09:85:98:65:c4:8c:11:c5:49:f6:d6:33:23:39:df:8d:b4:ff:92:84:b8:bd:a5:83:9f:ac:7f:2a:d1:4b:6a
+		[水产品2]Aquaculture-1.20.1-2.5.7.jar                |Aquaculture 2                 |aquaculture                   |2.5.7               |DONE      |Manifest: NOSIGNATURE
+		[实用世界] UtilityWorlds-1.20.1_1.1.8_patched.jar     |Utility Worlds                |utilityworlds                 |1.1.8               |DONE      |Manifest: NOSIGNATURE
+		l2harvester05x-0.1.2.jar                          |Harvester Compat 05x          |l2harvester05x                |0.1.2               |DONE      |Manifest: NOSIGNATURE
+		[时装盔甲重置版] cosmeticarmorreworked-1.20.1-v1a.jar    |CosmeticArmorReworked         |cosmeticarmorreworked         |1.20.1-v1a          |DONE      |Manifest: 5e:ed:25:99:e4:44:14:c0:dd:89:c1:a9:4c:10:b5:0d:e4:b1:52:50:45:82:13:d8:d0:32:89:67:56:57:01:53
+		[国创][果园乐事]fruitsdelight-1.1.1.jar                 |Fruits Delight                |fruitsdelight                 |1.1.1               |DONE      |Manifest: NOSIGNATURE
+		[优化][资源包惰性重载／抑验怠载] 0Pack2Reload-Forge-1.20.1-1.0.1|0Pack2Reload                  |opack2reload                  |1.0.1               |DONE      |Manifest: NOSIGNATURE
+		[诡厄巫法：启示录] GoetyRevelation-2.3.3fix.jar           |Goety: Revelation             |goety_revelation              |2.3.3fix            |DONE      |Manifest: NOSIGNATURE
+		[海灵物语] aquamirae-forge-1.20.1-6.4.0.jar           |Aquamirae                     |aquamirae                     |6.4.0               |DONE      |Manifest: NOSIGNATURE
+		tetra-1.20.1-6.9.0.jar                            |tetra                         |tetra                         |6.9.0               |DONE      |Manifest: NOSIGNATURE
+		[易验锻造] [Forge1.20.1]TetraClip-1.0.5.jar           |TetraClip                     |tetraclip                     |1.0.5               |DONE      |Manifest: NOSIGNATURE
+		[旷野之息高塔 ：再重制] totw_modded-forge-1.20.1-1.0.6.jar  |Towers of the Wild Modded     |totw_modded                   |1.0.6               |DONE      |Manifest: NOSIGNATURE
+		SkyVillages-1.0.4-1.19.2-1.20.1-forge-release.jar |Sky Villages                  |skyvillages                   |1.0.4               |DONE      |Manifest: NOSIGNATURE
+		kuma-api-forge-20.1.12+1.20.1.jar                 |KumaAPI                       |kuma_api                      |20.1.12             |DONE      |Manifest: NOSIGNATURE
+		[幻化] transmog-forge-1.3.0+1.20.jar                |Transmog                      |transmog                      |1.3.0+1.20          |DONE      |Manifest: NOSIGNATURE
+		[虫洞传送器]wormhole_artifact-1.2.0.jar                |Wormhole Artifact             |wormhole_artifact             |1.2.0               |DONE      |Manifest: NOSIGNATURE
+		auratip-forge-1.20.1-1.1.1-beta.jar               |AuraTip                       |auratip                       |1.1.1-beta          |DONE      |Manifest: NOSIGNATURE
+		[狼王饰品]dragonheart-1.5.3.jar                       |Dragon Heart                  |dragonheart                   |1.5.3               |DONE      |Manifest: NOSIGNATURE
+		incontrol-1.20-9.4.6.jar                          |InControl                     |incontrol                     |1.20-9.4.6          |DONE      |Manifest: NOSIGNATURE
+		[维度同步修复] dimensionalsycnfixes-1.20.1-0.0.1.jar    |DimensionalSycnFixes          |dimensionalsycnfixes          |1.20.1-0.0.1        |DONE      |Manifest: NOSIGNATURE
+		[生活调味料：女仆之梦]solmaiddream-1.0.1.jar                |Spice of Life: Maids' Dream   |solmaiddream                  |1.0.1               |DONE      |Manifest: NOSIGNATURE
+		[提示]Tips-Forge-1.20.1-12.1.8.jar                  |Tips                          |tipsmod                       |12.1.8              |DONE      |Manifest: eb:c4:b1:67:8b:f9:0c:db:dc:4f:01:b1:8e:61:64:39:4c:10:85:0b:a6:c4:c7:48:f0:fa:95:f2:cb:08:3a:e5
+		[国创][灵魂绑定]soulbound-forge-1.0.0+1.20.1.jar        |Soulbound                     |soulbound                     |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		immersive_aircraft-1.4.0+1.20.1-forge.jar         |Immersive Aircraft            |immersive_aircraft            |1.4.0+1.20.1        |DONE      |Manifest: NOSIGNATURE
+		[精妙核心]sophisticatedcore-1.20.1-1.3.37.1868.jar    |Sophisticated Core            |sophisticatedcore             |1.3.37.1868         |DONE      |Manifest: NOSIGNATURE
+		[优化][修复GPU内存泄漏] gpumemleakfix-1.20.1-1.8.jar      |Gpu memory leak fix           |gpumemleakfix                 |1.20.1-1.8          |DONE      |Manifest: NOSIGNATURE
+		[无限附魔修复] bowinfinityfix-1.20.x-forge-2.6.0.jar    |Bow Infinity Fix              |bowinfinityfix                |2.6.0               |DONE      |Manifest: NOSIGNATURE
+		[坏猪]pigzilla-1.4.1-forge-1.20.1.jar               |Pigzilla                      |pigzilla                      |1.4.1               |DONE      |Manifest: NOSIGNATURE
+		[优化][假死修复]nanhealthfixer-1.20.1-0.0.1.jar         |NaNHealthFixer                |nanhealthfixer                |1.20.1-0.0.1        |DONE      |Manifest: NOSIGNATURE
+		Controlling-forge-1.20.1-12.0.2.jar               |Controlling                   |controlling                   |12.0.2              |DONE      |Manifest: NOSIGNATURE
+		[Xaero的世界地图] XaerosWorldMap_1.39.4_Forge_1.20.jar |Xaero's World Map             |xaeroworldmap                 |1.39.4              |DONE      |Manifest: NOSIGNATURE
+		Placebo-1.20.1-8.6.3.jar                          |Placebo                       |placebo                       |8.6.3               |DONE      |Manifest: NOSIGNATURE
+		[前置]citadel-2.6.3-1.20.1.jar                      |Citadel                       |citadel                       |2.6.3               |DONE      |Manifest: NOSIGNATURE
+		[Alex生物]alexsmobs-1.22.9.jar                      |Alex's Mobs                   |alexsmobs                     |1.22.9              |DONE      |Manifest: NOSIGNATURE
+		Tetra JS-2001-6.9.0-1.0.2.jar                     |Tetra JS                      |tetrajs                       |2001-6.9.0-1.0.2    |DONE      |Manifest: NOSIGNATURE
+		cobweb-forge-1.20.1-1.0.1.jar                     |Cobweb                        |cobweb                        |1.0.1               |DONE      |Manifest: NOSIGNATURE
+		soul-fire-d-forge-1.20.1-4.0.11.jar               |Soul Fire'd                   |soul_fire_d                   |4.0.11              |DONE      |Manifest: NOSIGNATURE
+		[附魔描述前置]Bookshelf-Forge-1.20.1-20.2.15.jar        |Bookshelf                     |bookshelf                     |20.2.15             |DONE      |Manifest: eb:c4:b1:67:8b:f9:0c:db:dc:4f:01:b1:8e:61:64:39:4c:10:85:0b:a6:c4:c7:48:f0:fa:95:f2:cb:08:3a:e5
+		[物品缩放]itemzoom-1.20.1-2.9.0.jar                   |Item Zoom                     |itemzoom                      |2.9.0               |DONE      |Manifest: NOSIGNATURE
+		[结构群系快速搜索]biomespy-1.3.3-all.jar                  |BiomeSpy                      |biomespy                      |1.3.3               |DONE      |Manifest: NOSIGNATURE
+		[精妙背包]sophisticatedbackpacks-1.20.1-3.24.42.1770.j|Sophisticated Backpacks       |sophisticatedbackpacks        |3.24.42.1770        |DONE      |Manifest: NOSIGNATURE
+		Simple Jade Tetra-6.9.0-1.0.0.jar                 |Simple Jade Tetra             |simplejadetetra               |6.9.0-1.0.0         |DONE      |Manifest: NOSIGNATURE
+		[遗物]relics-1.20.1-0.8.0.13.jar                    |Relics                        |relics                        |0.8.0.13            |DONE      |Manifest: NOSIGNATURE
+		[JEI药水效果]jeed-1.20-2.2.5.jar                      |Just Enough Effects Descriptio|jeed                          |1.20-2.2.5          |DONE      |Manifest: NOSIGNATURE
+		[附魔剔除] enchantmentdisabletag-forge-1.1.0+1.20.1.ja|Enchantment Disable Tag       |enchantmentdisabletag         |1.1.0+1.20.1        |DONE      |Manifest: NOSIGNATURE
+		[傀儡地牢] golemdungeons-1.0.7.jar                    |Golem Dungeons                |golemdungeons                 |1.0.7               |DONE      |Manifest: NOSIGNATURE
+		[优化][材质包快速加载]quick-pack-forge-1.3.1+1.20.1-all.jar|quick-pack                    |quick_pack                    |1.3.1               |DONE      |Manifest: NOSIGNATURE
+		[搬运] carryon-forge-1.20.1-2.1.2.7.jar             |Carry On                      |carryon                       |2.1.2.7             |DONE      |Manifest: NOSIGNATURE
+		[FancyMenu前置]melody_forge_1.0.3_MC_1.20.1-1.20.4.j|Melody                        |melody                        |1.0.2               |DONE      |Manifest: NOSIGNATURE
+		petconnect-2.0.0.jar                              |Pet Connect                   |petconnect                    |2.0.0               |DONE      |Manifest: NOSIGNATURE
+		[诡厄巫法：奥妙] goetyarcana-1.1-SNAPSHOT.jar            |GoetyArcana                   |goetyarcana                   |1.1-SNAPSHOT        |DONE      |Manifest: NOSIGNATURE
+		[优化]fzzy_config-0.7.6+1.20.1+forge.jar            |Fzzy Config                   |fzzy_config                   |0.7.6+1.20.1+forge  |DONE      |Manifest: NOSIGNATURE
+		[优化][粒子] particle_core-0.3.3+1.20.1+forge.jar     |Particle Core                 |particle_core                 |0.3.3+1.20.1+forge  |DONE      |Manifest: NOSIGNATURE
+		l2damagetracker-0.3.8.jar                         |L2 Damage Tracker             |l2damagetracker               |0.3.8               |DONE      |Manifest: NOSIGNATURE
+		integration-forge-0.2.jar                         |Integration                   |integration                   |0.2                 |DONE      |Manifest: NOSIGNATURE
+		twilightforest-1.20.1-4.3.2508-universal.jar      |The Twilight Forest           |twilightforest                |4.3.2508            |DONE      |Manifest: NOSIGNATURE
+		[FancyMenu前置]konkrete_forge_1.8.0_MC_1.20-1.20.1.j|Konkrete                      |konkrete                      |1.8.0               |DONE      |Manifest: NOSIGNATURE
+		[RS无线范围增幅卡]RSInfinityBooster-1.20.1-1.0+41.jar    |RSInfinityBooster             |rsinfinitybooster             |1.20.1-1.0+41       |DONE      |Manifest: NOSIGNATURE
+		[精致存储]refinedstorage-1.12.4.jar                   |Refined Storage               |refinedstorage                |1.12.4              |DONE      |Manifest: NOSIGNATURE
+		[农夫乐事]FarmersDelight-1.20.1-1.2.11.jar            |Farmer's Delight              |farmersdelight                |1.20.1-1.2.11       |DONE      |Manifest: NOSIGNATURE
+		[料理乐事] cuisinedelight-1.1.18.jar                  |Cuisine Delight               |cuisinedelight                |1.1.18              |DONE      |Manifest: NOSIGNATURE
+		[末地乐事]ends_delight-2.5.1+forge.1.20.1.jar         |End's Delight                 |ends_delight                  |2.5.1+forge.1.20.1  |DONE      |Manifest: NOSIGNATURE
+		[优化][快速ping] fast-ip-ping-v1.0.11-mc1.20.4-forge.j|Fast IP Ping                  |fastipping                    |1.0.11              |DONE      |Manifest: NOSIGNATURE
+		[末地：创世] endrem_forge-5.3.3-R-1.20.1.jar           |End Remastered                |endrem                        |5.3.3-R-1.20.1      |DONE      |Manifest: NOSIGNATURE
+		[神秘遗物附属]architectbypass-1.1.0.jar                 |The Architect's Bypass        |architectbypass               |1.1.0               |DONE      |Manifest: NOSIGNATURE
+		[全息球拓展]ExtraHoloPage-6.9.0-1.2.16.jar             |ExtraHoloPage                 |extraholopage                 |6.9.0-1.2.16        |DONE      |Manifest: NOSIGNATURE
+		[自动射击] autofirebowenchant-1.0-1.20.1.jar          |Instinctive Release           |autofirebowenchant            |1.0-1.20.1          |DONE      |Manifest: NOSIGNATURE
+		[国创][EEEAB的生物]eeeabsmobs-1.20.1-0.98.1.jar        |EEEAB's Mobs                  |eeeabsmobs                    |1.20.1-0.98.1       |DONE      |Manifest: NOSIGNATURE
+		lionfishapi-2.7.jar                               |LionfishAPI                   |lionfishapi                   |2.7                 |DONE      |Manifest: NOSIGNATURE
+		[国创][雪の嫁]SnowWaifu-Forge-1.20.1-1.0.0.jar         |SnowWaifu                     |snowwaifu                     |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		[灾变]L_Enders_Cataclysm-3.16.jar                   |cataclysm                     |cataclysm                     |3.16                |DONE      |Manifest: NOSIGNATURE
+		[国创][车万女仆]touhoulittlemaid-1.5.3-forge+mc1.20.1.ja|Touhou Little Maid            |touhou_little_maid            |1.5.3-forge+mc1.20.1|DONE      |Manifest: NOSIGNATURE
+		[车万女仆：万法皆通] touhou_little_maid_spell-1.8.0.2-beta2|Touhou Little Maid: Spell     |touhou_little_maid_spell      |1.8.0.2-beta2-forge+|DONE      |Manifest: NOSIGNATURE
+		[帕秋莉手册]Patchouli-1.20.1-85-FORGE.jar              |Patchouli                     |patchouli                     |1.20.1-85-FORGE     |DONE      |Manifest: NOSIGNATURE
+		[地理相机]geotagged_screenshots-1.20.1-0.2.0.jar      |Geotagged Screenshots         |geotagged_screenshots         |1.20.1-0.2.0        |DONE      |Manifest: NOSIGNATURE
+		[Forge]RevelationFix-1.20.1-4.4.jar               |RevelationFix                 |revelationfix                 |4.4                 |DONE      |Manifest: NOSIGNATURE
+		[终焉图书馆] EndingLibrary-1.20.1-2.1.19fix-all.jar    |EndingLibrary                 |ending_library                |2.1.19fix           |DONE      |Manifest: NOSIGNATURE
+		[前置]collective-1.20.1-8.22.jar                    |Collective                    |collective                    |8.22                |DONE      |Manifest: NOSIGNATURE
+		[更多BOSS前置]CerbonsAPI-Forge-1.20.1-1.1.0.jar       |Cerbons API                   |cerbons_api                   |1.1.0               |DONE      |Manifest: NOSIGNATURE
+		constantmusic-forge-1.20.1-1.0.5.jar              |Constant Music                |constantmusic                 |1.0.5               |DONE      |Manifest: NOSIGNATURE
+		[Cracker的凋灵风暴] witherstormmod-1.20.1-4.2.1-all.jar|Cracker's Wither Storm Mod    |witherstormmod                |4.2.1               |DONE      |Manifest: NOSIGNATURE
+		[连锁破坏] ftb-ultimine-forge-2001.1.8.jar            |FTB Ultimine                  |ftbultimine                   |2001.1.8            |DONE      |Manifest: NOSIGNATURE
+		[戈伯] Gobber2-Forge-1.20.1-2.8.9.jar               |Gobber 2                      |gobber2                       |2.8.9               |DONE      |Manifest: NOSIGNATURE
+		[神秘遗物]EnigmaticLegacy-2.30.1.jar                  |Enigmatic Legacy              |enigmaticlegacy               |2.30.1              |DONE      |Manifest: NOSIGNATURE
+		[战利品修改]lootjs-forge-1.20.1-2.13.1.jar             |LootJS                        |lootjs                        |1.20.1-2.13.1       |DONE      |Manifest: NOSIGNATURE
+		[国创][暮色风味乐事]twilightdelight-2.1.1.jar             |Twilight's Flavor & Delight   |twilightdelight               |2.1.1               |DONE      |Manifest: NOSIGNATURE
+		[一键背包整理Next] InventoryProfilesNext-forge-1.20-1.10|Inventory Profiles Next       |inventoryprofilesnext         |1.10.20             |DONE      |Manifest: NOSIGNATURE
+		[前置]architectury-9.2.14-forge.jar                 |Architectury                  |architectury                  |9.2.14              |DONE      |Manifest: NOSIGNATURE
+		[葡园酒香前置]letsdo-API-forge-1.2.15-forge.jar         |[Let's Do] API                |doapi                         |1.2.15              |DONE      |Manifest: NOSIGNATURE
+		[葡园酒香] letsdo-vinery-forge-1.4.41.jar             |[Let's Do] Vinery             |vinery                        |1.4.41              |DONE      |Manifest: NOSIGNATURE
+		[FTB前置]ftb-library-forge-2001.2.12.jar            |FTB Library                   |ftblibrary                    |2001.2.12           |DONE      |Manifest: NOSIGNATURE
+		[太多弓] too_many_bows-forge-4.0.1.jar               |Too Many Bows                 |too_many_bows                 |4.0.1               |DONE      |Manifest: NOSIGNATURE
+		kubejsadditions-forge-4.3.4.jar                   |KubeJS Addditions (Forge)     |kubejsadditions               |4.3.4               |DONE      |Manifest: NOSIGNATURE
+		[FTB团队] ftb-teams-forge-2001.3.2.jar              |FTB Teams                     |ftbteams                      |2001.3.2            |DONE      |Manifest: NOSIGNATURE
+		warwither-1.20.1-1.0.7.jar                        |War Wither                    |warwither                     |1.0.7               |DONE      |Manifest: NOSIGNATURE
+		[生物群系音乐前置]cupboard-1.20.1-2.7.jar                 |Cupboard utilities            |cupboard                      |1.20.1-2.7          |DONE      |Manifest: NOSIGNATURE
+		[首次加入世界信息]firstjoinmessage-1.20.1-3.8.jar         |First Join Message            |firstjoinmessage              |3.8                 |DONE      |Manifest: NOSIGNATURE
+		[自定义局域网联机] lanserverproperties-1.11.1-forge.jar   |Lan Server Properties         |lanserverproperties           |1.11.1              |DONE      |Manifest: NOSIGNATURE
+		[光子] photon-forge-1.20.1-1.1.17.jar               |Photon                        |photon                        |1.1.17              |DONE      |Manifest: NOSIGNATURE
+		[哥布林商人前置]framework-forge-1.20.1-0.7.15.jar        |Framework                     |framework                     |0.7.15              |DONE      |Manifest: 0d:78:5f:44:c0:47:0c:8c:e2:63:a3:04:43:d4:12:7d:b0:7c:35:37:dc:40:b1:c1:98:ec:51:eb:3b:3c:45:99
+		[不昂贵]AnvilNeverTooExpensive-1.20.1-1.1.jar        |Anvil Never Too Expensive     |ante                          |1.1                 |DONE      |Manifest: NOSIGNATURE
+		[FTB备份前置]polylib-forge-2000.0.3-build.143.jar     |PolyLib                       |polylib                       |2000.0.3-build.143  |DONE      |Manifest: NOSIGNATURE
+		[优化]letmedespawn-1.20.x-forge-1.5.0.jar           |Let Me Despawn                |letmedespawn                  |1.5.0               |DONE      |Manifest: NOSIGNATURE
+		YeetusExperimentus-Forge-2.3.0-build.4+mc1.20.1.ja|Yeetus Experimentus           |yeetusexperimentus            |2.3.0-build.4+mc1.20|DONE      |Manifest: NOSIGNATURE
+		[悚怖钢] dreadsteel-1.20.1-1.2.0.jar                 |Dreadsteel                    |dreadsteel                    |1.20.1-1.2.0        |DONE      |Manifest: NOSIGNATURE
+		BetterAdvancements-NeoForge-1.20.1-0.4.2.25.jar   |Better Advancements           |betteradvancements            |0.4.2.25            |DONE      |Manifest: NOSIGNATURE
+		[狼王的附魔库]wolfenchantmentlib-1.0.4.jar              |Wolf's Enchantment Lib        |wolfenchantmentlib            |1.0.4               |DONE      |Manifest: NOSIGNATURE
+		[国创][镜回龙冒特供版]lm-1.3.0-forge-1.20.1.jar            |lm                            |lm                            |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		[犀牛] rhino-forge-2001.2.3-build.10.jar            |Rhino                         |rhino                         |2001.2.3-build.10   |DONE      |Manifest: NOSIGNATURE
+		kubejs-forge-2001.6.5-build.26.jar                |KubeJS                        |kubejs                        |2001.6.5-build.26   |DONE      |Manifest: NOSIGNATURE
+		ProbeJSLegacy-1.20.1-6.0.3.jar                    |ProbeJSLegacy                 |probejs_legacy                |6.0.3               |DONE      |Manifest: NOSIGNATURE
+		EventJS-1.20.1-1.4.3.jar                          |EventJS                       |eventjs                       |1.4.3               |DONE      |Manifest: NOSIGNATURE
+		MerchantJS-1.0.0.jar                              |MerchantJS                    |merchantjs                    |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		[拾取提示]InventorySpam-1.20.1-1.5.6.jar              |Inventory Spam                |inventoryspam                 |1.5.6               |DONE      |Manifest: NOSIGNATURE
+		[垃圾槽] trashslot-forge-1.20.1-15.1.5.jar           |TrashSlot                     |trashslot                     |15.1.5              |DONE      |Manifest: NOSIGNATURE
+		[结构预览] structure_preview-1.0.0-Forge1.20.1.jar    |结构预览js                        |structure_preview             |1.0.0-Forge1.20.1   |DONE      |Manifest: NOSIGNATURE
+		[遗物前置]OctoLib-FORGE-0.5.0.1+1.20.1.jar            |OctoLib                       |octolib                       |0.5.0.1             |DONE      |Manifest: NOSIGNATURE
+		[物品过滤器] item-filters-forge-2001.1.0-build.59.jar  |Item Filters                  |itemfilters                   |2001.1.0-build.59   |DONE      |Manifest: NOSIGNATURE
+		[FTB任务] ftb-quests-forge-2001.4.22.jar            |FTB Quests                    |ftbquests                     |2001.4.22           |DONE      |Manifest: NOSIGNATURE
+		[FTB联动]ftb-xmod-compat-forge-2.1.3.jar            |FTB XMod Compat               |ftbxmodcompat                 |2.1.3               |DONE      |Manifest: NOSIGNATURE
+		ftb-quests-entity-vis-1.4.0-1.20.1.jar            |FTB Quests Entity Visualizatio|ftbquestsentityvis            |1.4.0-1.20.1        |DONE      |Manifest: NOSIGNATURE
+		cataclysm_mux-0.0.6.jar                           |Cataclysm Mux                 |cataclysm_mux                 |0.0.6               |DONE      |Manifest: NOSIGNATURE
+		TRender-1.0.15-1.20.1-forge-SNAPSHOT.jar          |TRender                       |trender                       |1.0.15              |DONE      |Manifest: NOSIGNATURE
+		[海灵物语前置]obscure_api-18.jar                        |Obscure API                   |obscure_api                   |18                  |DONE      |Manifest: NOSIGNATURE
+		[优化][铷附属分支]chloride-FORGE-mc1.20.1-v1.7.7.jar     |Chloride                      |chloride                      |1.7.7               |DONE      |Manifest: NOSIGNATURE
+		waystones-forge-1.20.1-14.1.20.jar                |Waystones                     |waystones                     |14.1.20             |DONE      |Manifest: NOSIGNATURE
+		[经验机制改革] Clumps-forge-1.20.1-12.0.0.4.jar         |Clumps                        |clumps                        |12.0.0.4            |DONE      |Manifest: NOSIGNATURE
+		[高级战利品信息显示] AdvancedLootInfo-forge-1.20.1-1.12.0.j|AdvancedLootInfo              |ali                           |1.12.0              |DONE      |Manifest: NOSIGNATURE
+		[优化][红石] alternate_current-mc1.20-1.7.0.jar       |Alternate Current             |alternate_current             |1.7.0               |DONE      |Manifest: NOSIGNATURE
+		[Leawind的第三人称] leawind_third_person-v2.2.0-mc1.20-|Leawind's Third Person        |leawind_third_person          |2.2.0               |DONE      |Manifest: NOSIGNATURE
+		darkaltarui-3.7.7-Forge1.20.1.jar                 |黑暗祭坛UI                        |darkaltarui                   |3.7.7-Forge1.20.1   |DONE      |Manifest: NOSIGNATURE
+		crackerslib-forge-1.20.1-0.4.1.jar                |CrackersLib                   |crackerslib                   |1.20.1-0.4.1        |DONE      |Manifest: NOSIGNATURE
+		[生成禁止]BadMobs-1.20.1-19.0.4.jar                   |BadMobs                       |badmobs                       |19.0.4              |DONE      |Manifest: NOSIGNATURE
+		ftbbackups2-forge-1.20-1.0.23.jar                 |FTB Backups 2                 |ftbbackups2                   |1.0.23              |DONE      |Manifest: NOSIGNATURE
+		celestial_overhaul-1.1.6.jar                      |Celestial Overhaul            |celestial_overhaul            |1.0                 |DONE      |Manifest: NOSIGNATURE
+		[狼王指南针]explorerscompass-edited-1.20.1-1.4.0-forge.|Explorer's Compass            |explorerscompass              |1.20.1-1.3.3-forge  |DONE      |Manifest: NOSIGNATURE
+		tetra_addition-6.9.0-1.1.jar                      |TetraAddition                 |tetra_addition                |6.9.0-1.1           |DONE      |Manifest: NOSIGNATURE
+		[祸乱鬼魅 [FORGE]] BOMD-Forge-1.20.1-1.1.2.jar        |Bosses of Mass Destruction    |bosses_of_mass_destruction    |1.1.2               |DONE      |Manifest: NOSIGNATURE
+		azurelib-neo-1.20.1-3.1.9.jar                     |AzureLib                      |azurelib                      |3.1.9               |DONE      |Manifest: NOSIGNATURE
+		uranus-2.2.6-bugfix.2-1.20.1-forge.jar            |Uranus                        |uranus                        |2.2.6-bugfix.2      |DONE      |Manifest: NOSIGNATURE
+		[他们在干什么]watut-forge-1.20.1-1.2.3.jar              |What Are They Up To           |watut                         |1.20.1-1.2.3        |DONE      |Manifest: NOSIGNATURE
+		TravelersTitles-1.20-Forge-4.0.2.jar              |Traveler's Titles             |travelerstitles               |1.20-Forge-4.0.2    |DONE      |Manifest: NOSIGNATURE
+		[迎战] meetyourfight-1.20.1-1.6.0.jar               |Meet Your Fight               |meetyourfight                 |1.20.1-1.6.0        |DONE      |Manifest: NOSIGNATURE
+		[优化]GPUTape-1.18x-1.21x-1.0.5.1.jar               |GPUTape                       |gpu_tape                      |1.0.5               |DONE      |Manifest: NOSIGNATURE
+		[更好的熔炉前置]FactoryAPI-1.20.1-2.2.7-forge.jar        |Factory API                   |factory_api                   |2.2.7               |DONE      |Manifest: NOSIGNATURE
+		BetterFurnacesReforged-1.20.1-1.1.2518.1-forge.jar|Better Furnaces Reforged      |betterfurnacesreforged        |1.1.2518.1          |DONE      |Manifest: NOSIGNATURE
+		alexscaves-2.0.2.jar                              |Alex's Caves                  |alexscaves                    |2.0.2               |DONE      |Manifest: NOSIGNATURE
+		EnchantmentDescriptions-Forge-1.20.1-17.1.21.jar  |EnchantmentDescriptions       |enchdesc                      |17.1.21             |DONE      |Manifest: eb:c4:b1:67:8b:f9:0c:db:dc:4f:01:b1:8e:61:64:39:4c:10:85:0b:a6:c4:c7:48:f0:fa:95:f2:cb:08:3a:e5
+		[前置]libIPN-forge-1.20-4.0.2.jar                   |libIPN                        |libipn                        |4.0.2               |DONE      |Manifest: NOSIGNATURE
+		[妖怪之山通用库] mysterious_mountain_lib-1.6.34-1.20.1.ja|Mysterious Mountain Lib       |mysterious_mountain_lib       |1.6.34-1.20.1       |DONE      |Manifest: NOSIGNATURE
+		[国创][玉]Jade-1.20.1-Forge-11.13.2.jar              |Jade                          |jade                          |11.13.2+forge       |DONE      |Manifest: NOSIGNATURE
+		l2harvester-0.1.2.jar                             |L2Harvester                   |l2harvester                   |0.1.2               |DONE      |Manifest: NOSIGNATURE
+		[傀儡装配] modulargolems-2.6.44.jar                   |Modular Golems                |modulargolems                 |2.6.44              |DONE      |Manifest: NOSIGNATURE
+		[饰品附魔] curio_enchantment-2001.1.1-fix.1.jar       |Curio Enchantment             |curio_enchantment             |2001.1.1-fix.1      |DONE      |Manifest: NOSIGNATURE
+		[冰山] Iceberg-1.20.1-forge-1.1.25.jar              |Iceberg                       |iceberg                       |1.1.25              |DONE      |Manifest: NOSIGNATURE
+		[锻造之艺前置]mutil-1.20.1-6.2.0.jar                    |mutil                         |mutil                         |6.2.0               |DONE      |Manifest: NOSIGNATURE
+		[锻造之艺] art_of_forging-1.8.4-1.20.1.jar            |Art Of Forging                |art_of_forging                |1.8.4-1.20.1        |DONE      |Manifest: NOSIGNATURE
+		[精妙背包升级拓展] SophUpgradeAddons-0.7.1.jar            |Soph Upgrade Addons           |soph_upgrade_addons           |0.7.1               |DONE      |Manifest: NOSIGNATURE
+		[工作台性能优化] FastWorkbench-1.20.1-8.0.4.jar          |Fast Workbench                |fastbench                     |8.0.4               |DONE      |Manifest: NOSIGNATURE
+		malfu-combat-animation-3.1.jar                    |Malfu Combat Animation        |mr_malfu_combatanimation      |3.1                 |DONE      |Manifest: NOSIGNATURE
+		[传奇怪物] legendarymonsters-2.1.8 MC 1.20.1.jar      |LegendaryMonsters             |legendary_monsters            |1.20.1              |DONE      |Manifest: NOSIGNATURE
+		[Iron的法术与魔法书] irons_spellbooks-1.20.1-3.15.6.jar  |Iron's Spells 'n Spellbooks   |irons_spellbooks              |1.20.1-3.15.6       |DONE      |Manifest: NOSIGNATURE
+		[国创][通用拼音搜索]jecharacters-1.20.1-forge-4.6.4.jar   |Just Enough Characters        |jecharacters                  |4.6.4               |DONE      |Manifest: NOSIGNATURE
+		tetramodify-core-1542556-8148709.jar              |TetraModify Core              |tetra_modify_core             |6.9.0-1.0.6         |DONE      |Manifest: NOSIGNATURE
+		fancymenu_forge_3.8.1_MC_1.20.1.jar               |FancyMenu                     |fancymenu                     |3.8.1               |DONE      |Manifest: NOSIGNATURE
+		[他们在干什么前置]coroutil-forge-1.20.1-1.3.7.jar         |CoroUtil                      |coroutil                      |1.20.1-1.3.7        |DONE      |Manifest: NOSIGNATURE
+		[铁氧体磁芯] ferritecore-6.0.1-forge.jar               |Ferrite Core                  |ferritecore                   |6.0.1               |DONE      |Manifest: 41:ce:50:66:d1:a0:05:ce:a1:0e:02:85:9b:46:64:e0:bf:2e:cf:60:30:9a:fe:0c:27:e0:63:66:9a:84:ce:8a
+		[薪火，造炬成阳] torchesbecomesunlight-0.4.7-hotfix.jar  |Gathering Torches Become Sunli|torchesbecomesunlight         |1.20.1-0.4.7        |DONE      |Manifest: NOSIGNATURE
+		[饰品栏]curios-forge-5.14.1+1.20.1.jar               |Curios API                    |curios                        |5.14.1+1.20.1       |DONE      |Manifest: NOSIGNATURE
+		[莱特兰-古遗物] l2artifacts-2.4.28.jar                  |L2 Artifacts                  |l2artifacts                   |2.4.28              |DONE      |Manifest: NOSIGNATURE
+		geckolib-forge-1.20.1-4.8.3.jar                   |GeckoLib 4                    |geckolib                      |4.8.3               |DONE      |Manifest: NOSIGNATURE
+		[马儿蹦跳] umapyoi-1.12.73-1.20.1.jar                 |Umapyoi                       |umapyoi                       |1.12.73-1.20.1      |DONE      |Manifest: NOSIGNATURE
+		[马儿小女仆] uma_maid-1.0.7.jar                        |Uma Little Maid               |uma_maid                      |1.0.7               |DONE      |Manifest: NOSIGNATURE
+		[神秘遗物扩展] enigmaticaddons-1.2.5.jar                |Enigmatic Addons              |enigmaticaddons               |1.2.5               |DONE      |Manifest: NOSIGNATURE
+		[神秘佳肴] enigmaticdelicacy-1.0.1.jar                |Enigmatic Delicacy            |enigmaticdelicacy             |1.0.1               |DONE      |Manifest: NOSIGNATURE
+		[物品栏HUD]inventoryhud.forge.1.20.1-3.4.26.jar      |Inventory HUD+                |inventoryhud                  |3.4.26              |DONE      |Manifest: NOSIGNATURE
+		[前置·]yet_another_config_lib_v3-3.6.6+1.20.1-forge.|YetAnotherConfigLib           |yet_another_config_lib_v3     |3.6.6+1.20.1-forge  |DONE      |Manifest: NOSIGNATURE
+		solcarrot-1.20.1-1.15.1.jar                       |Spice of Life: Carrot Edition |solcarrot                     |1.15.1              |DONE      |Manifest: NOSIGNATURE
+		[游戏内NBT编辑器重制版] nbtedit-forge-5.2.8.jar            |In-game NBTEdit Reborn        |nbtedit                       |5.2.8               |DONE      |Manifest: NOSIGNATURE
+		[月亮事件] Enhanced_Celestials-forge-1.20.1-5.0.0.2.ja|Enhanced Celestials           |enhancedcelestials            |0.0NONE             |DONE      |Manifest: NOSIGNATURE
+		[前置]Corgilib-Forge-1.20.1-4.0.3.4.jar             |CorgiLib                      |corgilib                      |4.0.3.4             |DONE      |Manifest: NOSIGNATURE
+		l2itemselector-0.2.1.jar                          |L2 Item Selector              |l2itemselector                |0.2.1               |DONE      |Manifest: NOSIGNATURE
+		[无限puls] allarrowsinfinityfix-1.5-forge-mc1.20.jar|All Arrows Infinity Fix       |allarrowsinfinityfix          |1.5                 |DONE      |Manifest: NOSIGNATURE
+		[精致存储附属]refinedstorageaddons-0.10.0.jar           |Refined Storage Addons        |refinedstorageaddons          |0.10.0              |DONE      |Manifest: NOSIGNATURE
+		[优化][数据包修复]packetfixer-3.3.2-1.18-1.20.4-merged.ja|PacketFixer                   |packetfixer                   |3.3.2               |DONE      |Manifest: NOSIGNATURE
+		RosmontisLib-1.0.0-20260108.153058-43.jar         |Rosmontis Lib                 |rosmontislib                  |1.0.0               |DONE      |Manifest: NOSIGNATURE
+		[治愈营火] healingcampfire-1.20.1-6.2.jar             |Healing Campfire              |healingcampfire               |6.2                 |DONE      |Manifest: NOSIGNATURE
+		[开放式加载] OpenLoader-Forge-1.20.1-19.0.5.jar        |OpenLoader                    |openloader                    |19.0.5              |DONE      |Manifest: eb:c4:b1:67:8b:f9:0c:db:dc:4f:01:b1:8e:61:64:39:4c:10:85:0b:a6:c4:c7:48:f0:fa:95:f2:cb:08:3a:e5
+		[国创][输入法冲突修复] IMBlocker-5.5.4-forge+1.17-1.20.4.ja|IMBlocker                     |imblocker                     |5.5.4               |DONE      |Manifest: NOSIGNATURE
+		[脚步声Forge版] PresenceFootsteps-1.20.1-1.9.1-beta.1.|Presence Footsteps (Forge)    |presencefootsteps             |1.20.1-1.9.1-beta.1 |DONE      |Manifest: NOSIGNATURE
+	Crash Report UUID: aef680bc-0f07-447e-921e-b760723da5d0
+	FML: 47.4
+	Forge: net.minecraftforge:47.4.20
+	Kiwi Modules: 
+		kiwi:contributors
+		kiwi:data
+		skillslots:skillslots
+		skillslots:slot_unlock_recipe
+	Fragments: Back Stack Index: 0
+FragmentManager misc state:
+  mHost=icyllis.modernui.mc.UIManager$HostCallbacks@5018d5a6
+  mContainer=icyllis.modernui.mc.UIManager$HostCallbacks@5018d5a6
+  mCurState=7 mStateSaved=false mStopped=false mDestroyed=false

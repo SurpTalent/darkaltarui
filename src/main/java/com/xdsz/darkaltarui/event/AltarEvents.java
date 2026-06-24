@@ -95,8 +95,8 @@ public final class AltarEvents {
 
         prefillSavedData(serverPlayer, pedestals);
 
-        // 记录祭坛坐标供 EMI 填充使用
-        RitualEmiTransferHandler.currentAltarPos = pos.immutable();
+        // 记录祭坛坐标供 EMI 填充使用（仅当 EMI 已加载）
+        try { RitualEmiTransferHandler.currentAltarPos = pos.immutable(); } catch (NoClassDefFoundError ignored) {}
 
         com.sighs.apricityui.ApricityUI.menu(serverPlayer, TEMPLATE_PATH)
                 .bind(b -> b.saveddata(SAVEDDATA_NAME, MAX_PEDESTALS).player());
