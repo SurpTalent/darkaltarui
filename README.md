@@ -3,7 +3,7 @@
 [![MC Version](https://img.shields.io/badge/Minecraft-1.20.1-blue)](https://minecraft.net)
 [![Forge](https://img.shields.io/badge/Forge-47.2.0+-orange)](https://files.minecraftforge.net)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
-[![Version](https://img.shields.io/badge/version-3.7.7-brightgreen)](https://github.com/SurpTalent/darkaltarui)
+[![Version](https://img.shields.io/badge/version-3.8.0-brightgreen)](https://github.com/SurpTalent/darkaltarui)
 
 为 [Goety（诡厄巫法）](https://www.curseforge.com/minecraft/mc-mods/goety) 的黑暗祭坛提供 AUI 图形化操作界面，支持 JEI/EMI 配方一键自动填充。背包装备 / RS 网络存储联动。
 
