@@ -98,6 +98,9 @@ public class BackpackExtractPacket {
 
             // 激活物品（索引 0）
             ItemStack activation = pkt.ingredients.isEmpty() ? ItemStack.EMPTY : pkt.ingredients.get(0);
+            AdvancedMod.LOGGER.info("[DAU-PKT] activation={}, ingList[0]={}", 
+                activation.isEmpty() ? "EMPTY" : activation.getDisplayName().getString(),
+                pkt.ingredients.size() > 0 ? (pkt.ingredients.get(0).isEmpty() ? "EMPTY" : pkt.ingredients.get(0).getDisplayName().getString()) : "no list");
             if (!activation.isEmpty()) {
                 boolean ex = extract(sp, menu, savedStart, invStart, -1, activation, handlers, rsNet);
                 if (ex) {
