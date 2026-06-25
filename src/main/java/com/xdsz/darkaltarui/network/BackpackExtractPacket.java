@@ -107,8 +107,15 @@ public class BackpackExtractPacket {
                     BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
                     var be = sp.level().getBlockEntity(ap);
                     if (be != null) {
+                        AdvancedMod.LOGGER.info("[DAU-PKT] altar BE found: {}", be.getClass().getName());
                         var cap = be.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
-                        cap.resolve().ifPresent(h -> {
+                        AdvancedMod.LOGGER.info("[DAU-PKT] altar cap present={}", cap.isPresent());
+                        if (cap.isPresent()) {
+                            var h = cap.resolve().get();
+                            AdvancedMod.LOGGER.info("[DAU-PKT] altar slots={}, slot0={}, modifiable={}",
+                                h.getSlots(), 
+                                h.getSlots() > 0 ? (h.getStackInSlot(0).isEmpty() ? "empty" : h.getStackInSlot(0).getDisplayName().getString()) : "N/A",
+                                h instanceof net.minecraftforge.items.IItemHandlerModifiable);
                             if (h.getSlots() > 0 && h.getStackInSlot(0).isEmpty()) {
                                 if (h instanceof net.minecraftforge.items.IItemHandlerModifiable mh)
                                     mh.setStackInSlot(0, activation.copy());
@@ -116,9 +123,15 @@ public class BackpackExtractPacket {
                                     h.insertItem(0, activation.copy(), false);
                                 be.setChanged();
                                 sp.level().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
-                                AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar");
+                                AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar, now slot0={}", 
+                                    h.getStackInSlot(0).getDisplayName().getString());
+                            } else {
+                                AdvancedMod.LOGGER.info("[DAU-PKT] altar slot0 NOT empty or no slots! slots={} slot0={}",
+                                    h.getSlots(), h.getSlots() > 0 ? h.getStackInSlot(0).getDisplayName().getString() : "N/A");
                             }
-                        });
+                        }
+                    } else {
+                        AdvancedMod.LOGGER.info("[DAU-PKT] altar BE is NULL at {}", ap);
                     }
                 } else AdvancedMod.LOGGER.info("[DAU-PKT] activation NOT FOUND");
             }
