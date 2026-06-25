@@ -50,10 +50,12 @@ public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContai
             var cats = recipe.getCatalysts();
             if (!cats.isEmpty()) activation = cats.get(0).getEmiStacks().get(0).getItemStack().copy();
         }
-        // 底座物品
+        // 底座物品（跳过 index 0，那是 EMI 显示的催化剂/激活物品）
         List<ItemStack> ingredients = new ArrayList<>();
-        ingredients.add(activation); // index 0
-        for (var input : recipe.getInputs()) {
+        ingredients.add(activation); // index 0 = 放黑暗祭坛
+        var inputs = recipe.getInputs();
+        for (int i = 1; i < inputs.size(); i++) {
+            var input = inputs.get(i);
             if (input.isEmpty()) ingredients.add(ItemStack.EMPTY);
             else ingredients.add(input.getEmiStacks().get(0).getItemStack().copy());
         }
