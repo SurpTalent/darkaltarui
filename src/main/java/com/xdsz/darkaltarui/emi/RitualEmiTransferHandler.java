@@ -35,8 +35,11 @@ public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContai
     }
     @Override public boolean canCraft(EmiRecipe recipe, EmiCraftContext<ApricityContainerMenu> ctx) { return true; }
 
-    /** 由 AltarEvents 在打开 UI 时设置，供 craft 使用 */
-    public static BlockPos currentAltarPos = null;
+    /** 从 AltarPosHolder 获取祭坛坐标 */
+    private static BlockPos getAltarPos(ApricityContainerMenu menu) {
+        var pos = com.xdsz.darkaltarui.network.AltarPosHolder.get();
+        return pos != null ? pos : BlockPos.ZERO;
+    }
 
     @Override
     public boolean craft(EmiRecipe recipe, EmiCraftContext<ApricityContainerMenu> ctx) {
@@ -59,9 +62,10 @@ public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContai
             if (input.isEmpty()) ingredients.add(ItemStack.EMPTY);
             else ingredients.add(input.getEmiStacks().get(0).getItemStack().copy());
         }
-        int x = currentAltarPos != null ? currentAltarPos.getX() : 0;
-        int y = currentAltarPos != null ? currentAltarPos.getY() : 0;
-        int z = currentAltarPos != null ? currentAltarPos.getZ() : 0;
+        BlockPos altarPos = getAltarPos(ctx.getScreen().getMenu());
+        int x = altarPos.getX();
+        int y = altarPos.getY();
+        int z = altarPos.getZ();
         ModNetwork.CHANNEL.sendToServer(new BackpackExtractPacket(ingredients, x, y, z));
         AdvancedMod.LOGGER.info("[DAU] act={} ped={} altar=({},{},{})",
             activation.isEmpty() ? "none" : activation.getDisplayName().getString(), ingredients.size()-1, x, y, z);
