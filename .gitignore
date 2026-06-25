@@ -39,6 +39,10 @@ changelog.txt
 .reasonix/
 start_reasonix.bat
 
+# logs
+日志/
+报错文件/
+
 # other mod sources
 四模组源码/
 
