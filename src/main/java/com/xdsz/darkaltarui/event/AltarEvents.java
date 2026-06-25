@@ -51,6 +51,10 @@ public final class AltarEvents {
 
     @SubscribeEvent
     public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+        // 客户端也记录祭坛坐标（EMI craft 在客户端需要）
+        if (event.getLevel().isClientSide()) {
+            com.xdsz.darkaltarui.network.AltarPosHolder.set(event.getPos().immutable());
+        }
         if (event.getHand() != InteractionHand.MAIN_HAND) return;
         if (!event.getItemStack().isEmpty()) return;
 
