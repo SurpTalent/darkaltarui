@@ -40,31 +40,29 @@ public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContai
 
     @Override
     public boolean craft(EmiRecipe recipe, EmiCraftContext<ApricityContainerMenu> ctx) {
+        // 激活物品（index 0）— 从 backing recipe 或 catalyst 获取
+        ItemStack activation = ItemStack.EMPTY;
+        if (recipe.getBackingRecipe() instanceof com.Polarice3.Goety.common.crafting.RitualRecipe rr) {
+            var ing = rr.getActivationItem();
+            if (ing != null && ing.getItems().length > 0) activation = ing.getItems()[0].copy();
+        }
+        if (activation.isEmpty()) {
+            var cats = recipe.getCatalysts();
+            if (!cats.isEmpty()) activation = cats.get(0).getEmiStacks().get(0).getItemStack().copy();
+        }
         // 底座物品
         List<ItemStack> ingredients = new ArrayList<>();
+        ingredients.add(activation); // index 0
         for (var input : recipe.getInputs()) {
             if (input.isEmpty()) ingredients.add(ItemStack.EMPTY);
             else ingredients.add(input.getEmiStacks().get(0).getItemStack().copy());
         }
-        // 激活物品：从 EMI 催化剂中取（Goety 的 activation_item 在 EMI 中作为 catalyst 显示）
-        ItemStack activation = ItemStack.EMPTY;
-        var catalysts = recipe.getCatalysts();
-        if (!catalysts.isEmpty()) activation = catalysts.get(0).getEmiStacks().get(0).getItemStack().copy();
-        // 如果没有 catalyst，尝试从 backing recipe 获取
-        if (activation.isEmpty() && recipe.getBackingRecipe() instanceof com.Polarice3.Goety.common.crafting.RitualRecipe rr) {
-            var ing = rr.getActivationItem();
-            if (ing != null && ing.getItems().length > 0) activation = ing.getItems()[0].copy();
-        }
         int x = currentAltarPos != null ? currentAltarPos.getX() : 0;
         int y = currentAltarPos != null ? currentAltarPos.getY() : 0;
         int z = currentAltarPos != null ? currentAltarPos.getZ() : 0;
-        // 把激活物品放在 ingredients 最前面
-        List<ItemStack> all = new ArrayList<>();
-        all.add(activation);
-        all.addAll(ingredients);
-        ModNetwork.CHANNEL.sendToServer(new BackpackExtractPacket(all, x, y, z));
-        AdvancedMod.LOGGER.info("[DAU] packet sent, act={}, ped={}, altar=({},{},{})",
-            activation.isEmpty() ? "none" : activation.getDisplayName().getString(), ingredients.size(), x, y, z);
+        ModNetwork.CHANNEL.sendToServer(new BackpackExtractPacket(ingredients, x, y, z));
+        AdvancedMod.LOGGER.info("[DAU] act={} ped={} altar=({},{},{})",
+            activation.isEmpty() ? "none" : activation.getDisplayName().getString(), ingredients.size()-1, x, y, z);
         return true;
     }
 }

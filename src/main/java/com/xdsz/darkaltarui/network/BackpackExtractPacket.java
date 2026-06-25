@@ -99,31 +99,25 @@ public class BackpackExtractPacket {
             // 激活物品（索引 0）
             ItemStack activation = pkt.ingredients.isEmpty() ? ItemStack.EMPTY : pkt.ingredients.get(0);
             if (!activation.isEmpty()) {
-                // 宽松匹配：尝试用更宽松的方式查找
-                ItemStack found = findMatching(sp, menu, invStart, activation, handlers, rsNet);
-                if (found != null) {
-                    // 消耗物品
-                    if (consumeOne(sp, menu, invStart, found, handlers, rsNet)) {
-                        BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
-                        var be = sp.level().getBlockEntity(ap);
-                        if (be != null) {
-                            var cap = be.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
-                            cap.resolve().ifPresent(h -> {
-                                if (h.getSlots() > 0) {
-                                    if (h instanceof net.minecraftforge.items.IItemHandlerModifiable mh)
-                                        mh.setStackInSlot(0, activation.copy());
-                                    else
-                                        h.insertItem(0, activation.copy(), false);
-                                    be.setChanged();
-                                    sp.level().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
-                                    AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar");
-                                }
-                            });
-                        }
+                boolean ex = extract(sp, menu, savedStart, invStart, -1, activation, handlers, rsNet);
+                if (ex) {
+                    BlockPos ap = new BlockPos(pkt.altarX, pkt.altarY, pkt.altarZ);
+                    var be = sp.level().getBlockEntity(ap);
+                    if (be != null) {
+                        var cap = be.getCapability(ForgeCapabilities.ITEM_HANDLER, null);
+                        cap.resolve().ifPresent(h -> {
+                            if (h.getSlots() > 0 && h.getStackInSlot(0).isEmpty()) {
+                                if (h instanceof net.minecraftforge.items.IItemHandlerModifiable mh)
+                                    mh.setStackInSlot(0, activation.copy());
+                                else
+                                    h.insertItem(0, activation.copy(), false);
+                                be.setChanged();
+                                sp.level().sendBlockUpdated(ap, be.getBlockState(), be.getBlockState(), 3);
+                                AdvancedMod.LOGGER.info("[DAU-PKT] activation on altar");
+                            }
+                        });
                     }
-                } else {
-                    AdvancedMod.LOGGER.info("[DAU-PKT] activation NOT FOUND, looking for: {}", activation.getDisplayName().getString());
-                }
+                } else AdvancedMod.LOGGER.info("[DAU-PKT] activation NOT FOUND");
             }
 
             if (rsNet != null && slotIdx > 0)
@@ -137,67 +131,6 @@ public class BackpackExtractPacket {
             AdvancedMod.LOGGER.info("[DAU-PKT] done, filled {}", slotIdx);
         });
         ctx.get().setPacketHandled(true);
-    }
-
-    /** 查找匹配物品（不消耗） */
-    private static ItemStack findMatching(ServerPlayer sp, ApricityContainerMenu menu,
-            int invStart, ItemStack needed, List<InventoryHandler> handlers, INetwork rsNet) {
-        // 玩家背包
-        for (int i = 0; i < 36; i++) {
-            ItemStack st = menu.slots.get(invStart + i).getItem();
-            if (!st.isEmpty() && ItemStack.isSameItem(needed, st)) return st;
-        }
-        // 背包
-        for (InventoryHandler h : handlers) {
-            for (int i = 0; i < h.getSlots(); i++) {
-                ItemStack st = h.getSlotStack(i);
-                if (!st.isEmpty() && ItemStack.isSameItem(needed, st)) return st;
-            }
-        }
-        // RS
-        if (rsNet != null) {
-            for (var storage : rsNet.getItemStorageCache().getStorages()) {
-                for (ItemStack st : storage.getStacks()) {
-                    if (ItemStack.isSameItem(needed, st)) return st;
-                }
-            }
-        }
-        return null;
-    }
-
-    /** 消耗1个匹配物品 */
-    private static boolean consumeOne(ServerPlayer sp, ApricityContainerMenu menu,
-            int invStart, ItemStack target, List<InventoryHandler> handlers, INetwork rsNet) {
-        // 玩家背包
-        for (int i = 0; i < 36; i++) {
-            ItemStack st = menu.slots.get(invStart + i).getItem();
-            if (st == target) {
-                st.shrink(1);
-                menu.slots.get(invStart + i).setChanged();
-                return true;
-            }
-        }
-        // 背包
-        for (InventoryHandler h : handlers) {
-            for (int i = 0; i < h.getSlots(); i++) {
-                if (h.getSlotStack(i) == target) {
-                    ItemStack reduced = target.copy(); reduced.shrink(1);
-                    h.setStackInSlot(i, reduced.isEmpty() ? ItemStack.EMPTY : reduced);
-                    return true;
-                }
-            }
-        }
-        // RS
-        if (rsNet != null) {
-            ItemStack toExtract = target.copy(); toExtract.setCount(1);
-            for (var storage : rsNet.getItemStorageCache().getStorages()) {
-                storage.extract(toExtract, 1, com.refinedmods.refinedstorage.api.util.IComparer.COMPARE_NBT,
-                    com.refinedmods.refinedstorage.api.util.Action.PERFORM);
-                rsNet.getItemStorageTracker().changed(sp, toExtract);
-                return true;
-            }
-        }
-        return false;
     }
 
     /** 提取 1 个物品到指定槽位（slotIdx 为 -1 表示只提取不放置） */
