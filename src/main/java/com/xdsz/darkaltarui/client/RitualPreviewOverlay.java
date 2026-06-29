@@ -129,7 +129,9 @@ public class RitualPreviewOverlay {
 
         String color = cached.ritualSupported ? "§a" : "§c";
         String icon = cached.ritualSupported ? "✅" : "❌";
-        g.drawString(font, "预合成: §e" + cached.ritualName, x, y, 0xFFFFFF); y += lh;
+        String recipeDisplay = I18n.get(cached.ritualName);
+        if (recipeDisplay.isEmpty()) recipeDisplay = cached.ritualName;
+        g.drawString(font, "预合成: §e" + recipeDisplay, x, y, 0xFFFFFF); y += lh;
         g.drawString(font, "仪式: " + color + cached.ritualType + " " + icon, x, y, 0xFFFFFF); y += lh;
         if (!cached.ritualSupported && !cached.ritualDesc.isEmpty()) {
             g.drawString(font, "  §7需求: " + cached.ritualDesc, x, y, 0xFFAAAAAA); y += lh;

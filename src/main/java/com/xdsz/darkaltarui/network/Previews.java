@@ -128,7 +128,7 @@ public class Previews {
         String craftType = match.getCraftType();
         if (craftType.isEmpty()) craftType = match.getRitualType().getPath();
         String ritualName = RITUAL_NAMES.getOrDefault(craftType, craftType);
-        String recipeId = match.getResultItem(sp.serverLevel().registryAccess()).getHoverName().getString();
+        String recipeId = match.getResultItem(sp.serverLevel().registryAccess()).getDescriptionId();
         boolean ritualOk = supported.contains(craftType);
 
         // 消耗追踪
