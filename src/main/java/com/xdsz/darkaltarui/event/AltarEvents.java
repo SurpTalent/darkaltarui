@@ -102,6 +102,9 @@ public final class AltarEvents {
         // 记录祭坛坐标 — 用不含 EMI 导入的简单 holder
         com.xdsz.darkaltarui.network.AltarPosHolder.set(pos.immutable());
 
+        // 标记 EMI handler 仅在祭坛界面有效
+        try { com.xdsz.darkaltarui.emi.RitualEmiTransferHandler.active = true; } catch (NoClassDefFoundError ignored) {}
+
         com.sighs.apricityui.ApricityUI.menu(serverPlayer, TEMPLATE_PATH)
                 .bind(b -> b.saveddata(SAVEDDATA_NAME, MAX_PEDESTALS).player());
 
@@ -118,6 +121,9 @@ public final class AltarEvents {
         var menu = event.getContainer();
         if (!(menu instanceof com.sighs.apricityui.instance.ApricityContainerMenu auiMenu)) return;
         if (!TEMPLATE_PATH.equals(auiMenu.getTemplatePath())) return;
+
+        // 清除 EMI handler 激活标记
+        try { com.xdsz.darkaltarui.emi.RitualEmiTransferHandler.active = false; } catch (NoClassDefFoundError ignored) {}
 
         var level = player.serverLevel();
         List<PedestalInfo> pedestals = loadPedestalPositions(player);

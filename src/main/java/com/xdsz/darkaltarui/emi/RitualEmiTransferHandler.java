@@ -22,8 +22,12 @@ import java.util.*;
  */
 public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContainerMenu> {
 
+    /** 仅在黑暗祭坛界面打开时设为 true */
+    public static boolean active = false;
+
     @Override public EmiPlayerInventory getInventory(AbstractContainerScreen<ApricityContainerMenu> screen) {
         List<EmiStack> stacks = new ArrayList<>();
+        if (!active) return new EmiPlayerInventory(stacks);
         var menu = screen.getMenu();
         if (menu.slots.size() < 36) return new EmiPlayerInventory(stacks);
         int start = menu.slots.size() - 36;
@@ -31,10 +35,11 @@ public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContai
         return new EmiPlayerInventory(stacks);
     }
     @Override public boolean supportsRecipe(EmiRecipe recipe) {
+        if (!active) return false;
         var id = recipe.getCategory().getId();
         return "goety".equals(id.getNamespace()) && id.getPath().startsWith("ritual");
     }
-    @Override public boolean canCraft(EmiRecipe recipe, EmiCraftContext<ApricityContainerMenu> ctx) { return true; }
+    @Override public boolean canCraft(EmiRecipe recipe, EmiCraftContext<ApricityContainerMenu> ctx) { return active; }
 
     /** 从 AltarPosHolder 获取祭坛坐标 */
     private static BlockPos getAltarPos(ApricityContainerMenu menu) {
