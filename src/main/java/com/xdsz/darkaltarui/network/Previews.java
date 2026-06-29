@@ -129,6 +129,7 @@ public class Previews {
         if (craftType.isEmpty()) craftType = match.getRitualType().getPath();
         String ritualName = RITUAL_NAMES.getOrDefault(craftType, craftType);
         String recipeId = match.getResultItem(sp.serverLevel().registryAccess()).getDescriptionId();
+        if (recipeId == null || recipeId.isEmpty()) recipeId = match.getResultItem(sp.serverLevel().registryAccess()).getHoverName().getString();
         boolean ritualOk = supported.contains(craftType);
 
         // 消耗追踪
@@ -139,6 +140,7 @@ public class Previews {
             ItemStack[] items = ing.getItems();
             if (items.length == 0) continue;
             String name = items[0].getDescriptionId();
+            if (name == null || name.isEmpty()) name = items[0].getHoverName().getString();
             int need = items[0].getCount();
             int found = 0, toFind = need;
             for (Iterator<ItemStack> it = rem.iterator(); it.hasNext() && toFind > 0;) {
