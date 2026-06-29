@@ -13,6 +13,7 @@ public class DarkAltarConfig {
     public static final ForgeConfigSpec.IntValue SOUL_COST_PER_ITEM;
     public static final ForgeConfigSpec.IntValue FE_PER_SOUL;
     public static final ForgeConfigSpec.IntValue TERMINAL_SOUL_COST;
+    public static final ForgeConfigSpec.BooleanValue EMI_ON_ALL_AUI;
 
     static {
         ForgeConfigSpec.Builder common = new ForgeConfigSpec.Builder();
@@ -36,6 +37,12 @@ public class DarkAltarConfig {
         FE_PER_SOUL = common
                 .comment("诅咒之笼供电：每灵魂能量转换的 FE。0=禁用")
                 .defineInRange("fe_per_soul", 1000, 0, Integer.MAX_VALUE);
+        common.pop();
+
+        common.push("emi");
+        EMI_ON_ALL_AUI = common
+                .comment("是否让 JEI/EMI 在所有 ApricityUI 界面显示（默认仅黑暗祭坛界面显示）。开启后银行/市场/拍卖等界面也会显示 JEI/EMI")
+                .define("show_on_all_aui", false);
         common.pop();
 
         COMMON_SPEC = common.build();

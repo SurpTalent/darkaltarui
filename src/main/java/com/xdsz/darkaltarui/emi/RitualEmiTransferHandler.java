@@ -25,9 +25,10 @@ public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContai
     /** 仅在黑暗祭坛界面打开时设为 true */
     public static boolean active = false;
 
-    /** 仅当模板路径匹配祭坛界面时生效 */
+    /** 仅当模板路径匹配祭坛界面时生效（或配置开启全部 AUI） */
     private static boolean isAltarScreen(AbstractContainerScreen<?> screen) {
         if (active) return true;
+        if (com.xdsz.darkaltarui.DarkAltarConfig.EMI_ON_ALL_AUI.get()) return true;
         try {
             if (screen.getMenu() instanceof com.sighs.apricityui.instance.ApricityContainerMenu aui) {
                 String path = aui.getTemplatePath();

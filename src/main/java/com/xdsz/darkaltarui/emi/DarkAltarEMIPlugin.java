@@ -2,6 +2,7 @@ package com.xdsz.darkaltarui.emi;
 
 import com.sighs.apricityui.instance.ApricityContainerScreen;
 import com.sighs.apricityui.registry.ApricityMenus;
+import com.xdsz.darkaltarui.DarkAltarConfig;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
@@ -25,11 +26,13 @@ public class DarkAltarEMIPlugin implements EmiPlugin {
 
     @Override
     public void register(EmiRegistry registry) {
-        // ★ 仅对黑暗祭坛 AUI 屏幕提供 EMI 边界（避免挤压其他模组的 AUI 界面）
+        // ★ EMI 边界：配置控制是否影响其他 AUI 屏幕
+        boolean allAui = DarkAltarConfig.EMI_ON_ALL_AUI.get();
         registry.addScreenBoundsProvider(ApricityContainerScreen.class, screen -> {
-            var menu = screen.getMenu();
-            String path = menu.getTemplatePath();
-            if (path == null || !path.contains("altar")) return null; // 非祭坛 → 不提供边界
+            if (!allAui) {
+                String path = screen.getMenu().getTemplatePath();
+                if (path == null || !path.contains("altar")) return null; // 仅祭坛
+            }
             return new Bounds((screen.width - 200) / 2, 0, 200, screen.height);
         });
 
