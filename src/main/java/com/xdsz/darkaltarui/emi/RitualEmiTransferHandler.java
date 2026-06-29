@@ -25,9 +25,21 @@ public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContai
     /** 仅在黑暗祭坛界面打开时设为 true */
     public static boolean active = false;
 
+    /** 仅当模板路径匹配祭坛界面时生效 */
+    private static boolean isAltarScreen(AbstractContainerScreen<?> screen) {
+        if (active) return true;
+        try {
+            if (screen.getMenu() instanceof com.sighs.apricityui.instance.ApricityContainerMenu aui) {
+                String path = aui.getTemplatePath();
+                return path != null && path.contains("altar");
+            }
+        } catch (Exception ignored) {}
+        return false;
+    }
+
     @Override public EmiPlayerInventory getInventory(AbstractContainerScreen<ApricityContainerMenu> screen) {
         List<EmiStack> stacks = new ArrayList<>();
-        if (!active) return new EmiPlayerInventory(stacks);
+        if (!isAltarScreen(screen)) return new EmiPlayerInventory(stacks);
         var menu = screen.getMenu();
         if (menu.slots.size() < 36) return new EmiPlayerInventory(stacks);
         int start = menu.slots.size() - 36;
