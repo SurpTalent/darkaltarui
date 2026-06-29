@@ -135,7 +135,16 @@ public class RitualPreviewOverlay {
             g.drawString(font, "  §7需求: " + cached.ritualDesc, x, y, 0xFFAAAAAA); y += lh;
         }
         if (!cached.missing.isEmpty()) {
-            g.drawString(font, "  缺少: §c" + cached.missing, x, y, 0xFF6666); y += lh;
+            // 翻译缺失物品名
+            StringBuilder translated = new StringBuilder();
+            for (String part : cached.missing.split(", ")) {
+                String[] kv = part.split("×");
+                String tn = I18n.get(kv[0]);
+                if (translated.length() > 0) translated.append(", ");
+                translated.append(tn.isEmpty() ? kv[0] : tn);
+                if (kv.length > 1) translated.append("×").append(kv[1]);
+            }
+            g.drawString(font, "  缺少: §c" + translated.toString(), x, y, 0xFF6666); y += lh;
         }
         for (var m : cached.materials) {
             String displayName = I18n.get(m.name);
