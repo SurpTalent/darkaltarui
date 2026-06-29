@@ -25,9 +25,13 @@ public class DarkAltarEMIPlugin implements EmiPlugin {
 
     @Override
     public void register(EmiRegistry registry) {
-        // ★ 告诉 EMI：AUI 屏幕的 GUI 区域是中央 200px 面板
-        registry.addScreenBoundsProvider(ApricityContainerScreen.class, screen ->
-                new Bounds((screen.width - 200) / 2, 0, 200, screen.height));
+        // ★ 仅对黑暗祭坛 AUI 屏幕提供 EMI 边界（避免挤压其他模组的 AUI 界面）
+        registry.addScreenBoundsProvider(ApricityContainerScreen.class, screen -> {
+            var menu = screen.getMenu();
+            String path = menu.getTemplatePath();
+            if (path == null || !path.contains("altar")) return null; // 非祭坛 → 不提供边界
+            return new Bounds((screen.width - 200) / 2, 0, 200, screen.height);
+        });
 
         // 注册 + 按钮传输处理器
         registry.addRecipeHandler(ApricityMenus.APRICITY_CONTAINER.get(),
