@@ -25,6 +25,7 @@ public class RitualEmiTransferHandler implements EmiRecipeHandler<ApricityContai
     @Override public EmiPlayerInventory getInventory(AbstractContainerScreen<ApricityContainerMenu> screen) {
         List<EmiStack> stacks = new ArrayList<>();
         var menu = screen.getMenu();
+        if (menu.slots.size() < 36) return new EmiPlayerInventory(stacks);
         int start = menu.slots.size() - 36;
         for (int i = 0; i < 36; i++) stacks.add(EmiStack.of(menu.slots.get(start + i).getItem()));
         return new EmiPlayerInventory(stacks);

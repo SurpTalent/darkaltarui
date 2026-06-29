@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background: transparent; font-family: "Microsoft YaHei", sans-serif; color: #fff;
+  display: flex; justify-content: center; align-items: center; height: 100vh; }
+.panel { width: 240px; background: #1a1a2e; border: 2px solid #c9a03a; border-radius: 12px;
+  padding: 16px; text-align: center; }
+h1 { color: #c9a03a; font-size: 20px; margin-bottom: 4px; }
+.balance { color: #ffd700; font-size: 16px; margin-bottom: 16px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.btn { background: #2a2a4a; border: 1px solid #c9a03a; color: #fff; padding: 12px 8px;
+  border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.15s; }
+.btn:hover { background: #3a3a5a; border-color: #ffd700; }
+.btn .icon { font-size: 24px; display: block; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="panel">
+  <h1>🏦 交子钱包</h1>
+  <div class="balance" id="balance">余额: -- 交子</div>
+  <div class="grid">
+    <div class="btn" onclick="aui.open('bank')"><span class="icon">🏦</span>银行</div>
+    <div class="btn" onclick="aui.open('trade')"><span class="icon">🤝</span>交易</div>
+    <div class="btn" onclick="aui.open('shop')"><span class="icon">🏪</span>商店</div>
+    <div class="btn" onclick="aui.open('auction')"><span class="icon">🔨</span>拍卖行</div>
+    <div class="btn" onclick="aui.open('mailbox')"><span class="icon">📬</span>邮箱</div>
+    <div class="btn" onclick="aui.close()"><span class="icon">✖</span>关闭</div>
+  </div>
+</div>
+<script>
+// 从 saved_data 读余额
+var bal = aui.data("balance") || "0";
+document.getElementById("balance").textContent = "余额: " + bal + " 交子";
+</script>
+</body>
+</html>
