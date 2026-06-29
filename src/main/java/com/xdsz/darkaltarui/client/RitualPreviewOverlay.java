@@ -5,6 +5,7 @@ import com.xdsz.darkaltarui.network.RitualPreviewPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.BlockHitResult;
@@ -60,9 +61,12 @@ public class RitualPreviewOverlay {
         if (cached.supportedRituals != null && !cached.supportedRituals.isEmpty()) {
             for (String s : cached.supportedRituals) w = Math.max(w, font.width("  " + s) + 20);
         } else if (!cached.ritualName.isEmpty()) {
-            for (var m : cached.materials)
-                w = Math.max(w, font.width("  " + (m.present ? "✓" : "✗") + " " + m.name + " "
+            for (var m : cached.materials) {
+                String dn = I18n.get(m.name);
+                if (dn.isEmpty()) dn = m.name;
+                w = Math.max(w, font.width("  " + (m.present ? "✓" : "✗") + " " + dn + " "
                     + (m.present ? ""+m.needed : m.found+"/"+m.needed) + "个") + 20);
+            }
             w = Math.max(w, font.width(" 缺少: " + cached.missing) + 20);
         }
         int lines;
@@ -134,8 +138,10 @@ public class RitualPreviewOverlay {
             g.drawString(font, "  缺少: §c" + cached.missing, x, y, 0xFF6666); y += lh;
         }
         for (var m : cached.materials) {
+            String displayName = I18n.get(m.name);
+            if (displayName.isEmpty()) displayName = m.name;
             String count = m.present ? (m.needed + "个") : (m.found + "/" + m.needed + "个");
-            g.drawString(font, "  " + (m.present ? "§a✓" : "§c✗") + " §f" + m.name + " §7" + count, x, y, 0xFFFFFF);
+            g.drawString(font, "  " + (m.present ? "§a✓" : "§c✗") + " §f" + displayName + " §7" + count, x, y, 0xFFFFFF);
             y += lh;
         }
     }

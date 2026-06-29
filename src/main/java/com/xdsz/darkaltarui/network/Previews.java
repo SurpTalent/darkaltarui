@@ -138,7 +138,7 @@ public class Previews {
         for (Ingredient ing : match.getIngredients()) {
             ItemStack[] items = ing.getItems();
             if (items.length == 0) continue;
-            String name = items[0].getHoverName().getString();
+            String name = items[0].getDescriptionId();
             int need = items[0].getCount();
             int found = 0, toFind = need;
             for (Iterator<ItemStack> it = rem.iterator(); it.hasNext() && toFind > 0;) {
